@@ -12,6 +12,8 @@ banner_mask_alpha: 0.5
 
 Well, it's a long story since I've been preparing for this column for a long time. 
 
+<!-- more -->
+
 In the past few years, I spent a lot of time on things that others consider as burdens. Such as spraying plastic models, assembling a DIY portable screen, and using Vim instead of IDE software to do some coding stuff. It is because that many people think these things are unnecessary and time-consuming, I look like I'm making myself some trouble.
 
 > Why do it yourself when there's already a mature product?
