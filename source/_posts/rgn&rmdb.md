@@ -11,6 +11,8 @@ banner_mask_alpha: 0.5
 Since I'm an enthusiastic fan for games and movies, I choose to set up some columns talking about reviews for those works.
 {% endnote %}
 
+<!-- more -->
+
 # RMDb
 ![RMDb](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/rgn&rmdb/LOGOs/2.png)
 
