@@ -26,10 +26,10 @@ This is the first post in RGN! :yum:
 </center>
 
 
-While major manufacturers are scrambling to make open-world games, Square Enix surprisingly choosed to make a game with only linear story. And after the fiasco of *Marvel's Avengers*, it is hard to believe that SE made *Marvel's Guardians of the Galaxy* such a good super hero game that saved the day.
+While major manufacturers are scrambling to make open-world games, Square Enix surprisingly chooses to make a game with only linear story. And after the fiasco of *Marvel's Avengers*, it is hard to believe that SE made *Marvel's Guardians of the Galaxy* such a good super hero game that saved the day.
 
 # A Traditional Cosmic Comic Book Story
-Just like so many others around the world, when I was a boy, I also dreamed of driving a spaceship of my own and traveling in the galaxy. Fighting against space villains to save the whole universe,  it feels so cool even just think about it. And thanks to *Guardians of the Galaxy*, you finally got the chance to achieve the childhood dream. In this game, you can play the role of Peter Quill, AKA ~~Sun-Lord, or Star-Man~~ Star-Lord, save his "daughter" and the entire universe at the same time, along with other members of Guardians of the Galaxy.
+Just like so many others around the world, when I was a boy, I also dreamed of driving a spaceship of my own and traveling in the galaxy. Fighting against space villains to save the whole universe, it feels so cool even just think about it. And thanks to *Guardians of the Galaxy*, you finally got the chance to achieve the childhood dream. In this game, you can play the role of Peter Quill, AKA ~~Sun-Lord, or Star-Man~~ Star-Lord, save his "daughter" and the entire universe at the same time, along with other members of Guardians of the Galaxy.
 
 ![Screenshot 1](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/1.jpg)
 
@@ -46,7 +46,7 @@ The best part of this game is its visual effects and performance. Without pre-pr
 ![Screenshot 4](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/4.jpg)
 
 # Average-Level Combat
-In contrast to the visual impact and auditory shock, the combat leaves a lot more to be desired. In the combat, what you can do can be summary into only three simple things: attack, hide, and give orders. Though every character has 4 active skills, you can only experience them from Star-Lord's perspective. This could be better if the combat become just like *Final Fantasy 7 RE*, in which you can easily swap characters during the combat. Many animations of excution are also repetitive, every enemy type only has a single excution, which makes the combat even more boring. Moreover, the scenario interaction definitely cannot be considered as fluent and smooth. For example, sometimes you give Destroyer an order to throw a giant stone, and without any movement, he suddenly transport to the interactive point. 
+In contrast to the visual impact and auditory shock, the combat leaves a lot more to be desired. In the combat, what you can do can be summary into only three simple things: attack, hide, and give orders. Though every character has 4 active skills, you can only experience them from Star-Lord's perspective. This could be better if the combat become just like *Final Fantasy 7 RE*, in which you can easily swap characters during the combat. Many animations of execution are also repetitive, every enemy type only has a single execution, which makes the combat even more boring. Moreover, the scenario interaction definitely cannot be considered as fluent and smooth. For example, sometimes you give Destroyer an order to throw a giant stone, and without any movement, he suddenly transport to the interactive point. 
 
 ![Screenshot 5](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/5.jpg)
 
