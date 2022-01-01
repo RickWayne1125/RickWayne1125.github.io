@@ -1,6 +1,6 @@
 ---
 title: Marvel's Guardians of the Galaxy Review
-categories: General
+categories: RGN
 tags: [RGN, Marvel, Guardians of the Galaxy]
 index_img: /img/MarvelGOG/cover.jpg
 banner_img: /img/MarvelGOG/cover.jpg
