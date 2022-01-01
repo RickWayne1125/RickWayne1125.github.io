@@ -911,7 +911,7 @@ links:
       title: "Fluid Blog",
       intro: "Theme Blog",
       link: "https://hexo.fluid-dev.com/",
-      avatar: "/img/favicon.png"
+      avatar: "/img/links/favicon.png"
     }
     # - {
     #   title: "Fluid Docs",
