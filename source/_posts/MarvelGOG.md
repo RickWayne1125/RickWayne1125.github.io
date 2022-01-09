@@ -56,9 +56,9 @@ In contrast to the visual impact and auditory shock, the combat leaves a lot mor
 In conclusion, though the combat cannot be called enjoyable, the characters and performance still make this game worth playing, especially for those comic fans and cosmic fans. In this case, I give *Marvel's Guardians of the Galaxy* a 7.5 grade, which means even with some drawbacks, it is still a great game. ~~Also, as a fan of both comics and movies of Guardians of the Galaxy, I can give this a game a 8.5 on scale of 10.~~ If you are a fan of Guardians of the Galaxy, and you are not averse to ARPG games, you must try this game.
 
 {% gi 5 2-2-1 %}
-  ![7](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/7.jpg)
-  ![8](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/8.jpg)
-  ![9](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/9.jpg)
-  ![10](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/10.jpg)
-  ![11](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/11.jpg)
+  ![](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/7.jpg)
+  ![](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/8.jpg)
+  ![](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/9.jpg)
+  ![](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/10.jpg)
+  ![](https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/11.jpg)
 {% endgi %}
