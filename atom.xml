@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Tranquility &amp; Peace.</title>
+  
+  <subtitle>Welcome to my tiny blog, dear friends!</subtitle>
+  <link href="https://rickwayne1125.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://rickwayne1125.github.io/"/>
+  <updated>2022-01-09T09:02:17.954Z</updated>
+  <id>https://rickwayne1125.github.io/</id>
+  
+  <author>
+    <name>Rick Wayne</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Marvel&#39;s Guardians of the Galaxy Review</title>
+    <link href="https://rickwayne1125.github.io/2021/12/31/MarvelGOG/"/>
+    <id>https://rickwayne1125.github.io/2021/12/31/MarvelGOG/</id>
+    <published>2021-12-31T13:03:24.531Z</published>
+    <updated>2022-01-09T09:02:17.954Z</updated>
+    
+    
+    <summary type="html">No Open World, no Equipment System, but still a great linear single-player game, or more like a 20-hour-long super hero movie.</summary>
+    
+    
+    
+    <category term="RGN" scheme="https://rickwayne1125.github.io/categories/RGN/"/>
+    
+    
+    <category term="RGN" scheme="https://rickwayne1125.github.io/tags/RGN/"/>
+    
+    <category term="Marvel" scheme="https://rickwayne1125.github.io/tags/Marvel/"/>
+    
+    <category term="Guardians of the Galaxy" scheme="https://rickwayne1125.github.io/tags/Guardians-of-the-Galaxy/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>New Columns Comming Soon</title>
+    <link href="https://rickwayne1125.github.io/2021/12/27/rgn&amp;rmdb/"/>
+    <id>https://rickwayne1125.github.io/2021/12/27/rgn&amp;rmdb/</id>
+    <published>2021-12-27T06:24:01.724Z</published>
+    <updated>2021-12-27T09:46:28.680Z</updated>
+    
+    
+    <summary type="html">&lt;div class=&quot;note note-success&quot;&gt;
+            &lt;p&gt;Since I’m an enthusiastic fan for games and movies, I choose to set up some columns talking about reviews for those works.&lt;/p&gt;
+          &lt;/div&gt;</summary>
+    
+    
+    
+    <category term="General" scheme="https://rickwayne1125.github.io/categories/General/"/>
+    
+    
+    <category term="RGN" scheme="https://rickwayne1125.github.io/tags/RGN/"/>
+    
+    <category term="General" scheme="https://rickwayne1125.github.io/tags/General/"/>
+    
+    <category term="RMDb" scheme="https://rickwayne1125.github.io/tags/RMDb/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>To Be a &quot;Troublemaker&quot;</title>
+    <link href="https://rickwayne1125.github.io/2021/12/26/troublemaker/"/>
+    <id>https://rickwayne1125.github.io/2021/12/26/troublemaker/</id>
+    <published>2021-12-26T10:08:40.140Z</published>
+    <updated>2021-12-27T06:58:38.441Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;Why be a Troublemaker?&lt;br&gt;
+What is a Troublemaker?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Well, it’s a long story since I’ve been preparing for this column for a long time.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="General" scheme="https://rickwayne1125.github.io/categories/General/"/>
+    
+    
+    <category term="General" scheme="https://rickwayne1125.github.io/tags/General/"/>
+    
+    <category term="Troublemaker" scheme="https://rickwayne1125.github.io/tags/Troublemaker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="https://rickwayne1125.github.io/2021/08/13/hello-world/"/>
+    <id>https://rickwayne1125.github.io/2021/08/13/hello-world/</id>
+    <published>2021-08-13T03:50:52.332Z</published>
+    <updated>2021-08-16T09:36:42.254Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
+        
+      
+    
+    
+    
+    <category term="Auto" scheme="https://rickwayne1125.github.io/categories/Auto/"/>
+    
+    
+    <category term="Auto" scheme="https://rickwayne1125.github.io/tags/Auto/"/>
+    
+  </entry>
+  
+</feed>
