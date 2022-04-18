@@ -117,18 +117,18 @@
   
   
   <entry>
-    <title>Categories</title>
+    <title>About Me</title>
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<div class="note note-primary">            <p>Incoming master of science in computer science</p>          </div><div class="note note-info">            <p>Hobbies include games, anime, movies, music, programming…</p>          </div><div class="note note-secondary">            <p>Looking for an internship</p>          </div>]]></content>
     
   </entry>
   
   
   
   <entry>
-    <title>About Me</title>
+    <title>Categories</title>
     <link href="/"/>
     <url>/</url>
     
