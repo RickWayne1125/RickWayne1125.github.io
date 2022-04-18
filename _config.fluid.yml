@@ -853,6 +853,10 @@ about:
     - { class: "iconfont icon-github-fill", link: "https://github.com/RickWayne1125", tip: "GitHub" }
     - { class: "iconfont icon-twitter-fill", link: "https://twitter.com/RickW26088769", tip: "Twitter" }
     - { class: "iconfont icon-telegram-fill", link: "https://t.me/rickwayne", tip: "Telegram" }
+    - { class: "iconfont icon-rss-fill", link: "https://t.me/WayneTech1125", tip: "Telegram Channel" }
+    - { class: "iconfont icon-bilibili-fill", link: "https://space.bilibili.com/7842502", tip: "BiliBili" }
+    - { class: "iconfont icon-steam", link: "https://steamcommunity.com/id/starcloud1125", tip: "Steam" }
+
     # - { class: "iconfont icon-douban-fill", link: "https://douban.com", tip: "豆瓣" }
     # - { class: "iconfont icon-wechat-fill", qrcode: "/img/favicon.png" }
 
