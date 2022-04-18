@@ -640,7 +640,7 @@ post:
 # 评论插件
 # Comment plugins
 #
-# 开启评论需要先设置上方 `post: comments: enable: true`，然后根据 `type` 设置下方对应的评论插件参数
+# 开启评论需要先设置上方 `post: comments: enable: true`GHC，然后根据 `type` 设置下方对应的评论插件参数
 # Enable comments need to be set `post: comments: enable: true`, then set the corresponding comment plugin parameters below according to `type`
 #---------------------------
 
@@ -906,6 +906,18 @@ links:
       intro: "Coding for fun~",
       link: "https://blog.aoaoao.me/",
       avatar: "/img/links/aaron.jpeg"
+    }
+    - {
+      title: "fdChen's Blog",
+      intro: "fdChen的掉发收集箱",
+      link: "https://blog.fdchen.host/",
+      avatar: "/img/links/fdChen.png"
+    }
+    - {
+      title: "Peanuty's Blog",
+      intro: "花生叶的摸鱼圣地",
+      link: "https://peanuty.cn/",
+      avatar: "/img/links/peanuty.jpg"
     }
     - {
       title: "Fluid Blog",
