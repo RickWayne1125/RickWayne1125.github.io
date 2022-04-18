@@ -117,22 +117,22 @@
   
   
   <entry>
-    <title>About Me</title>
+    <title>Categories</title>
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[<div class="note note-primary">            <p>Incoming master of science in computer science</p>          </div><div class="note note-info">            <p>Hobbies include games, anime, movies, music, programming…</p>          </div><div class="note note-secondary">            <p>Looking for an internship</p>          </div>]]></content>
+    <content type="html"><![CDATA[]]></content>
     
   </entry>
   
   
   
   <entry>
-    <title>Categories</title>
+    <title>About Me</title>
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<div class="note note-primary">            <p>Incoming master of science in computer science</p>          </div><div class="note note-info">            <p>Hobbies include games, anime, movies, music, programming…</p>          </div><div class="note note-secondary">            <p>Looking for an internship</p>          </div>]]></content>
     
   </entry>
   
@@ -183,22 +183,22 @@
   
   
   <entry>
-    <title>2019 Winter in Singapore</title>
+    <title>2015 Summer in Xiamen</title>
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2019, I joined a short AI bootcamp in Singapore. I spent some time in NUS for the bootcamp workshop, and I also attended field training lessons in iSPACE.</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_3.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_4.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_6.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_12.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_13.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_14.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_15.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_16.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_17.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_11.jpg" alt=""></div></div></div></div>]]></content>
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2015, after a month of volunteer work in an English Summer Camp, I went on a trip to Xiamen, China</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_1.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_3.jpg" alt=""></div></div></div></div>]]></content>
     
   </entry>
   
   
   
   <entry>
-    <title>2015 Summer in Xiamen</title>
+    <title>2019 Winter in Singapore</title>
     <link href="/"/>
     <url>/</url>
     
-    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2015, after a month of volunteer work in an English Summer Camp, I went on a trip to Xiamen, China</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_1.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_3.jpg" alt=""></div></div></div></div>]]></content>
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2019, I joined a short AI bootcamp in Singapore. I spent some time in NUS for the bootcamp workshop, and I also attended field training lessons in iSPACE.</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_3.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_4.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_6.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_12.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_13.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_14.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_15.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_16.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_17.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_11.jpg" alt=""></div></div></div></div>]]></content>
     
   </entry>
   
