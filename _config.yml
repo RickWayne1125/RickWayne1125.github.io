@@ -3,7 +3,10 @@ subtitle: Welcome to my tiny blog, dear friends!
 description: ''
 keywords: null
 author: Rick Wayne
-language: en
+language: 
+- en
+- zh-CN
+- zh-TW
 timezone: ''
 url: https://rickwayne1125.github.io/
 permalink: ':year/:month/:day/:title/'

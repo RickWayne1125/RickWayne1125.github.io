@@ -5,6 +5,7 @@ tags: [General, Troublemaker]
 index_img: /img/troublemaker.png
 banner_img: /img/troublemaker.png
 banner_mask_alpha: 0.5
+date: 2021-12-26
 ---
 
 > Why be a Troublemaker?

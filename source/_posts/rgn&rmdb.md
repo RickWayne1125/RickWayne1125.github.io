@@ -5,6 +5,7 @@ tags: [General, RGN, RMDb]
 index_img: /img/rgn&rmdb/poster.png
 banner_img: /img/rgn&rmdb/poster.png
 banner_mask_alpha: 0.5
+date: 2021-12-27
 ---
 
 {% note success %}
