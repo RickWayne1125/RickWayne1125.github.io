@@ -6,6 +6,7 @@ index_img: /img/MarvelGOG/cover.jpg
 banner_img: /img/MarvelGOG/cover.jpg
 banner_mask_alpha: 0.5
 excerpt: No Open World, no Equipment System, but still a great linear single-player game, or more like a 20-hour-long super hero movie.
+date: 2021-12-31
 ---
 
 {% note info %}
