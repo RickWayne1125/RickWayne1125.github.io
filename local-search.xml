@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2023/02/21/hello-world/"/>
+    <url>/2023/02/21/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="quick-start">Quick Start</h2><h3 id="create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">"My New Post"</span><br></code></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="run-server">Run server</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></tbody></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Auto</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Auto</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>New Columns Comming Soon</title>
+    <link href="/2023/02/21/rgn&amp;rmdb/"/>
+    <url>/2023/02/21/rgn&amp;rmdb/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-success">            <p>Since I’m an enthusiastic fan for games and movies, I choose to set up some columns talking about reviews for those works.</p>          </div><span id="more"></span><h1>RMDb</h1><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/rgn&amp;rmdb/LOGOs/2.png" alt="RMDb"></p><p>Ricky’s Movie Database is a column where I share my reviews on films, television series, etc<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="https://en.wikipedia.org/wiki/IMDb">[1]</span></a></sup>.</p><div class="note note-info">            <p>Hope you don’t mind, IMDb. XD</p>          </div><p>In this column, I will not only score those works with a grade between 0 and 10 in different aspects, but also write some short or long comments.</p><p>I will score those video works mainly from those aspects below:</p><ul><li>Stories</li><li>Characters</li><li>Visual Effects</li><li>Conception</li></ul><h1>RGN</h1><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/rgn&amp;rmdb/LOGOs/1.png" alt="RGN"></p><p>In Ricky’s Games Network, I will share my opinions on games that I have already played for a while. Just like RMDb, I will rate those games and write comments about them.</p><p>I will score those games mainly from those aspects below:</p><ul><li>Stories&amp;Charaters</li><li>Visual Effects</li><li>Conception</li><li>Playability</li><li>Friendly</li></ul><div class="note note-warning">            <p>Remember, those reviews are only personal opinions. I am not a professional reviewer, so please be patient and willing to share your view in the comment. I am looking forward to hearing your voice.</p>          </div><h1>Reference</h1><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a href="https://en.wikipedia.org/wiki/IMDb">https://en.wikipedia.org/wiki/IMDb</a><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>General</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RGN</tag>
+      
+      <tag>General</tag>
+      
+      <tag>RMDb</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>To Be a &quot;Troublemaker&quot;</title>
+    <link href="/2023/02/21/troublemaker/"/>
+    <url>/2023/02/21/troublemaker/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Why be a Troublemaker?<br>What is a Troublemaker?</p></blockquote><p>Well, it’s a long story since I’ve been preparing for this column for a long time.</p><span id="more"></span><p>In the past few years, I spent a lot of time on things that others consider as burdens. Such as spraying plastic models, assembling a DIY portable screen, and using Vim instead of IDE software to do some coding stuff. It is because that many people think these things are unnecessary and time-consuming, I look like I’m making myself some trouble.</p><blockquote><p>Why do it yourself when there’s already a mature product?</p></blockquote><p>In fact, I really enjoy the process of learning new techniques and building stuffs of my own. It’s just like building your own toys, the same as assembling a Lego.</p><blockquote><p>What is this column going to talk about?</p></blockquote><p>My share on those “troublemaking” experience, it could be:</p><ul><li>assembling some plastic models (gunpla, tanks, etc.)</li><li>building a PC or some other hardwares</li><li>some interesting coding stuff</li><li>…</li></ul><p><strong>Coming Soon…</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>General</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>General</tag>
+      
+      <tag>Troublemaker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Marvel&#39;s Guardians of the Galaxy Review</title>
+    <link href="/2021/12/31/MarvelGOG/"/>
+    <url>/2021/12/31/MarvelGOG/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-info">            <p>Happy New Year 2022! <span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>🎉</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f389.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>          </div><div class="note note-success">            <p>This is the first post in RGN! <span class="github-emoji"><span>😋</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>          </div><blockquote><p>No Open World,<br>No Equipment System,<br>But still a great linear single-player game,<br>Or more like a 20-hour-long super hero movie.</p></blockquote><center><font size="10">GREAT 🚀 7.5</font><font size="5">/10</font></center><p>While major manufacturers are scrambling to make open-world games, Square Enix surprisingly chooses to make a game with only linear story. And after the fiasco of <em>Marvel’s Avengers</em>, it is hard to believe that SE made <em>Marvel’s Guardians of the Galaxy</em> such a good super hero game that saved the day.</p><h1>A Traditional Cosmic Comic Book Story</h1><p>Just like so many others around the world, when I was a boy, I also dreamed of driving a spaceship of my own and traveling in the galaxy. Fighting against space villains to save the whole universe, it feels so cool even just think about it. And thanks to <em>Guardians of the Galaxy</em>, you finally got the chance to achieve the childhood dream. In this game, you can play the role of Peter Quill, AKA <s>Sun-Lord, or Star-Man</s> Star-Lord, save his “daughter” and the entire universe at the same time, along with other members of Guardians of the Galaxy.</p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/1.jpg" alt="Screenshot 1"></p><h1>Great Characterisation for Multiple Roles</h1><p>Though you spend most of the time playing Star-Lord, you can still enjoy the charm of other main characters. Each member of the team <s>except that space alpaca</s> has a highlight moment, and a mission that mainly tells his/her past. From the chats with other members, you can further learn about them, and discover more about their personalities and psychological issues. After you made some choices, they will act or treat you in different ways. And through this adventure, you’ll help everyone overcome his/her inner difficulties and unite them to stay tight to fight against the evils.</p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/2.jpg" alt="Screenshot 2"></p><h1>A Powerful and Shocking Performance</h1><p>The best part of this game is its visual effects and performance. Without pre-produced videos, everything looks greatly natural. The blast, laser, and explosion are always at the perfect timing. And also thanks to the “Classic Oldies”, scenes both in the battles and animations all look amazing.</p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/3.jpg" alt="Screenshot 3"></p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/4.jpg" alt="Screenshot 4"></p><h1>Average-Level Combat</h1><p>In contrast to the visual impact and auditory shock, the combat leaves a lot more to be desired. In the combat, what you can do can be summary into only three simple things: attack, hide, and give orders. Though every character has 4 active skills, you can only experience them from Star-Lord’s perspective. This could be better if the combat become just like <em>Final Fantasy 7 RE</em>, in which you can easily swap characters during the combat. Many animations of execution are also repetitive, every enemy type only has a single execution, which makes the combat even more boring. Moreover, the scenario interaction definitely cannot be considered as fluent and smooth. For example, sometimes you give Destroyer an order to throw a giant stone, and without any movement, he suddenly transport to the interactive point.</p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/5.jpg" alt="Screenshot 5"></p><p><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/6.jpg" alt="Screenshot 6"></p><h1>Conclusion</h1><p>In conclusion, though the combat cannot be called enjoyable, the characters and performance still make this game worth playing, especially for those comic fans and cosmic fans. In this case, I give <em>Marvel’s Guardians of the Galaxy</em> a 7.5 grade, which means even with some drawbacks, it is still a great game. <s>Also, as a fan of both comics and movies of Guardians of the Galaxy, I can give this a game a 8.5 on scale of 10.</s> If you are a fan of Guardians of the Galaxy, and you are not averse to ARPG games, you must try this game.</p><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/9.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/MarvelGOG/11.jpg" alt=""></div></div></div>]]></content>
+    
+    
+    <categories>
+      
+      <category>RGN</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>RGN</tag>
+      
+      <tag>Marvel</tag>
+      
+      <tag>Guardians of the Galaxy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  
+  
+  
+  <entry>
+    <title>Categories</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>About Me</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="note note-primary">            <p>Incoming master of science in computer science</p>          </div><div class="note note-info">            <p>Hobbies include games, anime, movies, music, programming…</p>          </div><div class="note note-secondary">            <p>Looking for an internship</p>          </div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>The World Is So Big, Yet I Owe It a Visit.</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><h1>Timeline</h1><h2 id="2021-summer-in-beijing-china"><a href="beijing_2021">2021 Summer in Beijing, China</a></h2><h2 id="2020-winter-in-hangzhou-zhejiang-china"><a href="zhejiang_2020">2020 Winter in Hangzhou, Zhejiang, China</a></h2><h2 id="2019-summer-in-hainan-china"><a href="hainan_2019">2019 Summer in Hainan, China</a></h2><h2 id="2019-winter-in-singapore"><a href="sg_2019">2019 Winter in Singapore</a></h2><h2 id="2018-summer-in-chongqing"><a href="cq_2018">2018 Summer in Chongqing</a></h2><h2 id="2016-summer-in-australia"><a href="aus_2016">2016 Summer in Australia</a></h2><h2 id="2015-summer-in-xiamen-china"><a href="xiamen_2015">2015 Summer in Xiamen, China</a></h2><h1>Other Stuff</h1><h2 id="my-gunplas"><a href="gunpla">My Gunplas</a></h2><h2 id="my-equipments">My Equipments</h2></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2019 Winter in Singapore</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2019, I joined a short AI bootcamp in Singapore. I spent some time in NUS for the bootcamp workshop, and I also attended field training lessons in iSPACE.</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_3.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_4.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_6.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_12.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_13.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_14.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_15.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_16.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_17.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_11.jpg" alt=""></div></div></div></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2016 Summer in Australia</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2016, I was the outstanding winner in a short video competition held by Department of Education in Victoria, Australia. And later I was invited to Melbourne for a visit thanks to this prize.</p>          </div><h2 id="melbourne">Melbourne</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_3.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_5.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_2.JPG" alt=""></div></div></div><h2 id="cairns">Cairns</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_2.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_3.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_5.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_6.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_7.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_8.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_9.JPG" alt=""></div></div></div><h2 id="sydney">Sydney</h2><p>Wait for uploading…</p></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2015 Summer in Xiamen</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2015, after a month of volunteer work in an English Summer Camp, I went on a trip to Xiamen, China</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_1.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_3.jpg" alt=""></div></div></div></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>tags</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Welcome to the Universal Century!</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-info">            <p>God I love Gundams.🤖</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/1.jpeg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/5.jpeg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/2.jpeg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/3.jpeg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/4.jpeg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/6.jpeg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/7.jpeg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/img/Gunpla/8.jpeg" alt=""></div></div></div></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Links</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
+  
+  
+  
+</search>
