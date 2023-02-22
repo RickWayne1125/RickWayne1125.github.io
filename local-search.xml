@@ -29,6 +29,33 @@
   
   
   <entry>
+    <title>To Be a &quot;Troublemaker&quot;</title>
+    <link href="/2023/02/21/troublemaker/"/>
+    <url>/2023/02/21/troublemaker/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>Why be a Troublemaker?<br>What is a Troublemaker?</p></blockquote><p>Well, it’s a long story since I’ve been preparing for this column for a long time.</p><span id="more"></span><p>In the past few years, I spent a lot of time on things that others consider as burdens. Such as spraying plastic models, assembling a DIY portable screen, and using Vim instead of IDE software to do some coding stuff. It is because that many people think these things are unnecessary and time-consuming, I look like I’m making myself some trouble.</p><blockquote><p>Why do it yourself when there’s already a mature product?</p></blockquote><p>In fact, I really enjoy the process of learning new techniques and building stuffs of my own. It’s just like building your own toys, the same as assembling a Lego.</p><blockquote><p>What is this column going to talk about?</p></blockquote><p>My share on those “troublemaking” experience, it could be:</p><ul><li>assembling some plastic models (gunpla, tanks, etc.)</li><li>building a PC or some other hardwares</li><li>some interesting coding stuff</li><li>…</li></ul><p><strong>Coming Soon…</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>General</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>General</tag>
+      
+      <tag>Troublemaker</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>New Columns Comming Soon</title>
     <link href="/2023/02/21/rgn&amp;rmdb/"/>
     <url>/2023/02/21/rgn&amp;rmdb/</url>
@@ -50,33 +77,6 @@
       <tag>General</tag>
       
       <tag>RMDb</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>To Be a &quot;Troublemaker&quot;</title>
-    <link href="/2023/02/21/troublemaker/"/>
-    <url>/2023/02/21/troublemaker/</url>
-    
-    <content type="html"><![CDATA[<blockquote><p>Why be a Troublemaker?<br>What is a Troublemaker?</p></blockquote><p>Well, it’s a long story since I’ve been preparing for this column for a long time.</p><span id="more"></span><p>In the past few years, I spent a lot of time on things that others consider as burdens. Such as spraying plastic models, assembling a DIY portable screen, and using Vim instead of IDE software to do some coding stuff. It is because that many people think these things are unnecessary and time-consuming, I look like I’m making myself some trouble.</p><blockquote><p>Why do it yourself when there’s already a mature product?</p></blockquote><p>In fact, I really enjoy the process of learning new techniques and building stuffs of my own. It’s just like building your own toys, the same as assembling a Lego.</p><blockquote><p>What is this column going to talk about?</p></blockquote><p>My share on those “troublemaking” experience, it could be:</p><ul><li>assembling some plastic models (gunpla, tanks, etc.)</li><li>building a PC or some other hardwares</li><li>some interesting coding stuff</li><li>…</li></ul><p><strong>Coming Soon…</strong></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>General</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>General</tag>
-      
-      <tag>Troublemaker</tag>
       
     </tags>
     
@@ -117,77 +117,11 @@
   
   
   <entry>
-    <title>Categories</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>About Me</title>
     <link href="/"/>
     <url>/</url>
     
     <content type="html"><![CDATA[<div class="note note-primary">            <p>Incoming master of science in computer science</p>          </div><div class="note note-info">            <p>Hobbies include games, anime, movies, music, programming…</p>          </div><div class="note note-secondary">            <p>Looking for an internship</p>          </div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>The World Is So Big, Yet I Owe It a Visit.</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[<div class="markdown-body"><h1>Timeline</h1><h2 id="2021-summer-in-beijing-china"><a href="beijing_2021">2021 Summer in Beijing, China</a></h2><h2 id="2020-winter-in-hangzhou-zhejiang-china"><a href="zhejiang_2020">2020 Winter in Hangzhou, Zhejiang, China</a></h2><h2 id="2019-summer-in-hainan-china"><a href="hainan_2019">2019 Summer in Hainan, China</a></h2><h2 id="2019-winter-in-singapore"><a href="sg_2019">2019 Winter in Singapore</a></h2><h2 id="2018-summer-in-chongqing"><a href="cq_2018">2018 Summer in Chongqing</a></h2><h2 id="2016-summer-in-australia"><a href="aus_2016">2016 Summer in Australia</a></h2><h2 id="2015-summer-in-xiamen-china"><a href="xiamen_2015">2015 Summer in Xiamen, China</a></h2><h1>Other Stuff</h1><h2 id="my-gunplas"><a href="gunpla">My Gunplas</a></h2><h2 id="my-equipments">My Equipments</h2></div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>2019 Winter in Singapore</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2019, I joined a short AI bootcamp in Singapore. I spent some time in NUS for the bootcamp workshop, and I also attended field training lessons in iSPACE.</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_3.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_4.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_6.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_12.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_13.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_14.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_15.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_16.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_17.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_11.jpg" alt=""></div></div></div></div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>2016 Summer in Australia</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2016, I was the outstanding winner in a short video competition held by Department of Education in Victoria, Australia. And later I was invited to Melbourne for a visit thanks to this prize.</p>          </div><h2 id="melbourne">Melbourne</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_3.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_5.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_2.JPG" alt=""></div></div></div><h2 id="cairns">Cairns</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_2.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_3.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_5.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_6.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_7.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_8.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_9.JPG" alt=""></div></div></div><h2 id="sydney">Sydney</h2><p>Wait for uploading…</p></div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>2015 Summer in Xiamen</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2015, after a month of volunteer work in an English Summer Camp, I went on a trip to Xiamen, China</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_1.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_3.jpg" alt=""></div></div></div></div>]]></content>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>tags</title>
-    <link href="/"/>
-    <url>/</url>
-    
-    <content type="html"><![CDATA[]]></content>
     
   </entry>
   
@@ -206,6 +140,72 @@
   
   <entry>
     <title>Links</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2019 Winter in Singapore</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2019, I joined a short AI bootcamp in Singapore. I spent some time in NUS for the bootcamp workshop, and I also attended field training lessons in iSPACE.</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_3.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_4.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_6.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_7.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_8.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_10.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_12.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_13.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_14.jpg" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_15.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_16.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_17.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/sg_2019_11.jpg" alt=""></div></div></div></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>The World Is So Big, Yet I Owe It a Visit.</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><h1>Timeline</h1><h2 id="2021-summer-in-beijing-china"><a href="beijing_2021">2021 Summer in Beijing, China</a></h2><h2 id="2020-winter-in-hangzhou-zhejiang-china"><a href="zhejiang_2020">2020 Winter in Hangzhou, Zhejiang, China</a></h2><h2 id="2019-summer-in-hainan-china"><a href="hainan_2019">2019 Summer in Hainan, China</a></h2><h2 id="2019-winter-in-singapore"><a href="sg_2019">2019 Winter in Singapore</a></h2><h2 id="2018-summer-in-chongqing"><a href="cq_2018">2018 Summer in Chongqing</a></h2><h2 id="2016-summer-in-australia"><a href="aus_2016">2016 Summer in Australia</a></h2><h2 id="2015-summer-in-xiamen-china"><a href="xiamen_2015">2015 Summer in Xiamen, China</a></h2><h1>Other Stuff</h1><h2 id="my-gunplas"><a href="gunpla">My Gunplas</a></h2><h2 id="my-equipments">My Equipments</h2></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2016 Summer in Australia</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2016, I was the outstanding winner in a short video competition held by Department of Education in Victoria, Australia. And later I was invited to Melbourne for a visit thanks to this prize.</p>          </div><h2 id="melbourne">Melbourne</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_3.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_5.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_mel_2.JPG" alt=""></div></div></div><h2 id="cairns">Cairns</h2><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_1.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_2.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_3.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_4.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_5.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_6.JPG" alt=""></div></div><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_7.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_8.JPG" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/aus_2016_cai_9.JPG" alt=""></div></div></div><h2 id="sydney">Sydney</h2><p>Wait for uploading…</p></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>tags</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>2015 Summer in Xiamen</title>
+    <link href="/"/>
+    <url>/</url>
+    
+    <content type="html"><![CDATA[<div class="markdown-body"><div class="note note-primary">            <p>In 2015, after a month of volunteer work in an English Summer Camp, I went on a trip to Xiamen, China</p>          </div><div class="group-image-container"><div class="group-image-row"><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_1.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_2.jpg" alt=""></div><div class="group-image-wrap"><img src="https://cdn.jsdelivr.net/gh/RickWayne1125/RickWayne1125.github.io@deploy/images/xiamen_2015_3.jpg" alt=""></div></div></div></div>]]></content>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Categories</title>
     <link href="/"/>
     <url>/</url>
     
