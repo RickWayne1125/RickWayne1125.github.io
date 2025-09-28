@@ -3,8 +3,8 @@ const ninja = document.querySelector('ninja-keys');
 
 // add the home and posts menu items
 ninja.data = [{
-    id: "nav-about",
-    title: "about",
+    id: "nav-",
+    title: "",
     section: "Navigation",
     handler: () => {
       window.location.href = "/";
@@ -43,7 +43,7 @@ ninja.data = [{
             },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
           title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
           description: "",
-          section: "News",},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025",
+          section: "News",},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
           title: ':pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by...',
           description: "",
           section: "News",},{
