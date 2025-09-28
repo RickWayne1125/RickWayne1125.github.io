@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Or you can just call me Ricky :sunglasses:
+subtitle: Or you can just call me Ricky
 
 profile:
   align: right
