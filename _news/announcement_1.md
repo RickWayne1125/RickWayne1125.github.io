@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-:pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by SoCC 2025.
+:pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by SoCC 2025! :clap:
