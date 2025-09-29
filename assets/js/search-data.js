@@ -44,6 +44,9 @@ ninja.data = [{
           section: "News",},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
           title: ':pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by...',
           description: "",
+          section: "News",},{id: "news-trophy-our-explore-request-cis250978-has-been-granted-by-nsf-access-i-m-serving-as-the-co-pi-on-this-project",
+          title: ':trophy: Our Explore request CIS250978 has been granted by NSF ACCESS! I’m serving...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
