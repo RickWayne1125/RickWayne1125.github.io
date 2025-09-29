@@ -6,7 +6,7 @@ subtitle: Or you can just call me Ricky
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: selfie.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>rwei7@stevens.edu</p>
