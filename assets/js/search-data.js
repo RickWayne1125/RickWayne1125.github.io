@@ -40,10 +40,7 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "News",},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
+            },},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
           title: ':pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by...',
           description: "",
           section: "News",},{
@@ -54,11 +51,25 @@ ninja.data = [{
           window.open("mailto:%72%77%65%69%37@%73%74%65%76%65%6E%73.%65%64%75", "_blank");
         },
       },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/RickWayne1125", "_blank");
+        },
+      },{
         id: 'social-rss',
         title: 'RSS Feed',
         section: 'Socials',
         handler: () => {
           window.open("/feed.xml", "_blank");
+        },
+      },{
+        id: 'social-spotify',
+        title: 'Spotify',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://open.spotify.com/user/31elm6whsflt6culxw7vomymcide", "_blank");
         },
       },{
       id: 'light-theme',
