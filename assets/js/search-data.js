@@ -35,12 +35,13 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
+            },},{id: "news-trophy-our-project-distributed-multi-agent-reinforcement-learning-with-serverless-computing-nairr240269-has-been-funded-by-the-national-artificial-intelligence-research-resource-pilot-nairr-pilot-program",
+          title: ':trophy: Our project “Distributed Multi-agent Reinforcement Learning with Serverless Computing” (NAIRR240269) has been...',
           description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
+          section: "News",},{id: "news-airplane-i-will-give-a-lightening-talk-about-our-ongoing-serverless-marl-project-at-the-nairr-pilot-inaugural-annual-meeting",
+          title: ':airplane: I will give a Lightening Talk about our ongoing Serverless MARL project...',
+          description: "",
+          section: "News",},{id: "news-pencil-our-paper-multi-agent-reinforcement-learning-with-serverless-computing-has-been-accepted-by-socc-2025-clap",
           title: ':pencil: Our paper “Multi-Agent Reinforcement Learning with Serverless Computing” has been accepted by...',
           description: "",
           section: "News",},{
