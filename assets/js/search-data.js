@@ -76,6 +76,13 @@ ninja.data = [{
           window.open("https://open.spotify.com/user/31elm6whsflt6culxw7vomymcide", "_blank");
         },
       },{
+        id: 'social-zotero',
+        title: 'Zotero',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.zotero.org/rickwayne1125", "_blank");
+        },
+      },{
       id: 'light-theme',
       title: 'Change theme to light',
       description: 'Change the theme of the site to Light',
