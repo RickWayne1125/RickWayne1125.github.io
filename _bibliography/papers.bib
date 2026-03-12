@@ -14,10 +14,28 @@
 @inproceedings{marless,
 author = {Wei, Rui and Yu, Hanfei and Song, Xikang and Li, Jian and Tiwari, Devesh and Mao, Ying and Wang, Hao},
 title = {Multi-Agent Reinforcement Learning with Serverless Computing},
-year = {2025},
-url = {https://intellisys.haow.us/},
+year = {2026},
+isbn = {9798400722769},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3772052.3772227},
+doi = {10.1145/3772052.3772227},
+abstract = {Multi-agent reinforcement learning (MARL) has emerged as a promising approach for tasks requiring multiple agents for cooperation or competition, such as scientific simulation, multi-robot collaboration, and traffic control. Serverless computing, with its dynamic and flexible resource allocation, has demonstrated potential for improving training efficiency and cost-efficiency in RL workloads. However, existing serverless RL training systems focus primarily on single-agent scenarios, overlooking the unique characteristics and inherent complexities of MARL—such as dynamic inter-agent relationships and heterogeneous policy requirements across agents—leaving inefficient and even infeasible support to diverse and complex MARL algorithms.This paper introduces MARLess, the first serverless MARL framework designed to support general MARL algorithms. MARLess decomposes MARL algorithms into serverless functions. It further integrates a dynamic learner sharing mechanism that exploits agent similarities to reduce model update costs and employs actor scaling tailored to MARL tasks, minimizing unnecessary sampling costs based on the data requirements of agents' models. This design optimizes both training efficiency and costs without harming the training quality. Experiments on AWS EC2 testbeds show that MARLess outperforms SOTA MARL baselines with up to 1.27\texttimes{}faster training and 68\% cost reduction. Large-scale evaluations on a 15-node cluster with a total of 1,920 vCPUs demonstrate MARLess's scalability and consistent performance under increasing workloads. For a real-world scientific application—turbulent flow simulation, MARLess achieves a 34\% cost reduction and 1.1\texttimes{} speedup.},
 booktitle = {Proceedings of the 2025 ACM Symposium on Cloud Computing},
-series = {SoCC'25},
-abbr={SoCC'25},
-selected={true},
+pages = {225–239},
+numpages = {15},
+keywords = {Serverless Computing, Cloud Computing, Multi-Agent Reinforcement Learning},
+location = {
+},
+series = {SoCC '25}
+}
+
+@misc{rlhfless,
+      title={RLHFless: Serverless Computing for Efficient RLHF}, 
+      author={Rui Wei and Hanfei Yu and Shubham Jain and Yogarajan Sivakumar and Devesh Tiwari and Jian Li and Seung-Jong Park and Hao Wang},
+      year={2026},
+      eprint={2602.22718},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2602.22718}, 
 }
