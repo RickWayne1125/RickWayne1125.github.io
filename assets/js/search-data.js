@@ -47,6 +47,9 @@ ninja.data = [{
           section: "News",},{id: "news-trophy-our-explore-request-cis250978-has-been-granted-by-nsf-access-i-m-serving-as-the-co-pi-on-this-project",
           title: ':trophy: Our Explore request CIS250978 has been granted by NSF ACCESS! I’m serving...',
           description: "",
+          section: "News",},{id: "news-pencil-our-paper-xrlhf-efficient-rlhf-with-serverless-rollout-actors-has-been-accepted-by-socc-2026-clap",
+          title: ':pencil: Our paper “xRLHF: Efficient RLHF with Serverless Rollout Actors” has been accepted...',
+          description: "",
           section: "News",},{
         id: 'social-email',
         title: 'email',
