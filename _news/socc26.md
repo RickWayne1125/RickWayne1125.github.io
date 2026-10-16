@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-:pencil: Our paper “xRLHF: Efficient RLHF with Serverless Rollout Actors” has been accepted by SoCC 2026! :clap:
+:pencil: Our paper “xRLHF: Efficient RLHF with Serverless Rollout Actors” has been accepted by SoCC 2026! See you in Singapore! :clap:
