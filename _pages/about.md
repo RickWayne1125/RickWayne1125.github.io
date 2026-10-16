@@ -27,6 +27,6 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-:wave: Hi there! I am a second-year PhD student under the [Department of Electrical and Computer Engineering](https://www.stevens.edu/school-engineering-science/departments/electrical-computer-engineering) at [Stevens Institute of Technology](https://www.stevens.edu/), advised by Dr. [Hao Wang](https://intellisys.haow.us/haowang/). Before that, I received my Master of Science in Computer Science degree at [Boston University](https://www.bu.edu/), and my Bachelor's degree in Computer Science and Technology at [Chongqing University](https://english.cqu.edu.cn/).
+:wave: Hi there! I am a third-year PhD student under the [Department of Electrical and Computer Engineering](https://www.stevens.edu/school-engineering-science/departments/electrical-computer-engineering) at [Stevens Institute of Technology](https://www.stevens.edu/), advised by Dr. [Hao Wang](https://intellisys.haow.us/haowang/). Before that, I received my Master of Science in Computer Science degree at [Boston University](https://www.bu.edu/), and my Bachelor's degree in Computer Science and Technology at [Chongqing University](https://english.cqu.edu.cn/).
 
 My research interests include **serverless computing**, **reinforcement learning**, and **machine learning systems**. My goal is to design efficient serverless ML systems for varying types of large-scale AI workloads, especially reinforcement learning tasks.
