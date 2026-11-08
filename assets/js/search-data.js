@@ -25,7 +25,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A growing collection of your cool projects.",
+          description: "Research projects and open-source contributions.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -50,7 +50,12 @@ ninja.data = [{
           section: "News",},{id: "news-pencil-our-paper-xrlhf-efficient-rlhf-with-serverless-rollout-actors-has-been-accepted-by-socc-2026-see-you-in-singapore-clap",
           title: ':pencil: Our paper “xRLHF: Efficient RLHF with Serverless Rollout Actors” has been accepted...',
           description: "",
-          section: "News",},{
+          section: "News",},{id: "projects-reef",
+          title: 'Reef',
+          description: "Reef is open-source infrastructure for continually self-improving agents, connecting inference, feedback, learning, and versioned delivery.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/reef/";
+            },},{
         id: 'social-email',
         title: 'email',
         section: 'Socials',
