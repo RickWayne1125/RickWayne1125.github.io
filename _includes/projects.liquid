@@ -1,35 +1,68 @@
 <div class="col">
-  <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
-    <div class="card h-100 hoverable">
-      {% if project.img %}
-        {%
-          include figure.liquid
-          loading="eager"
-          path=project.img
-          sizes = "250px"
-          alt="project thumbnail"
-          class="card-img-top"
-        %}
-      {% endif %}
-      <div class="card-body">
-        <h2 class="card-title">{{ project.title }}</h2>
-        <p class="card-text">{{ project.description }}</p>
-        <div class="row ml-1 mr-1 p-0">
-          {% if project.github %}
-            <div class="github-icon">
-              <div class="icon" data-toggle="tooltip" title="Code Repository">
-                <a href="{{ project.github }}"><i class="fa-brands fa-github gh-icon"></i></a>
-              </div>
-              {% if project.github_stars %}
-                <span class="stars" data-toggle="tooltip" title="GitHub Stars">
-                  <i class="fa-solid fa-star"></i>
-                  <span id="{{ project.github_stars }}-stars"></span>
-                </span>
-              {% endif %}
-            </div>
+  <div class="card h-100 hoverable">
+    {% if project.img %}
+      {%
+        include figure.liquid
+        loading="eager"
+        path=project.img
+        sizes = "250px"
+        alt="project thumbnail"
+        class="card-img-top"
+      %}
+    {% endif %}
+    <div class="card-body">
+      <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}">
+        <h2 class="card-title d-flex align-items-center">
+          {% if project.icon %}
+            <img
+              src="{{ project.icon | relative_url }}"
+              alt="{{ project.title }} logo"
+              class="mr-2"
+              style="width: 2.5rem; height: 2.5rem; object-fit: contain; background: #fff; border-radius: 0.35rem; padding: 0.25rem;"
+            >
           {% endif %}
-        </div>
+          {{ project.title }}
+        </h2>
+      </a>
+      {% if project.role %}
+        <p class="card-text font-weight-bold">{{ project.role }}</p>
+      {% endif %}
+      <p class="card-text">{{ project.description }}</p>
+      {% if project.contribution %}
+        <p class="card-text">{{ project.contribution }}</p>
+      {% endif %}
+      <div class="row ml-1 mr-1 p-0">
+        {% if project.github %}
+          <div class="github-icon">
+            <div class="icon" data-toggle="tooltip" title="Code Repository">
+              <a href="{{ project.github }}" aria-label="{{ project.title }} on GitHub"
+                ><i class="fa-brands fa-github gh-icon" aria-hidden="true"></i> GitHub</a
+              >
+            </div>
+            {% if project.github_stars_count %}
+              <div class="small mt-2">
+                <a href="{{ project.github }}/stargazers"
+                  ><i class="fa-solid fa-star" aria-hidden="true"></i> {{ project.github_stars_count }} stars</a
+                >
+                <span class="text-muted">· {{ project.github_stars_checked }}</span>
+              </div>
+            {% elsif project.github_stars %}
+              <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+                <i class="fa-solid fa-star"></i>
+                <span id="{{ project.github_stars }}-stars"></span>
+              </span>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
+      {% if project.pull_request %}
+        <p class="card-text mt-3 mb-0">
+          <a href="{{ project.pull_request }}">
+            {{- project.pull_request_label }}
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i
+          ></a>
+        </p>
+      {% endif %}
     </div>
-  </a>
+  </div>
 </div>
