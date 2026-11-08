@@ -10,7 +10,7 @@
       series={SoCC '26 Vol. 2},
       doi={10.1145/3828161.3857868},
       url={https://doi.org/10.1145/3828161.3857868},
-      pdf={xrlhf-socc26.pdf},
+      abstract={Reinforcement Learning from Human Feedback (RLHF) is widely used to align Large Language Models (LLMs) with human preferences and can also improve reasoning on complex tasks. However, RLHF training is highly resource-intensive because inference and training coexist, creating dynamic resource demands. Existing RLHF frameworks rely on serverful infrastructures, which handle this variability poorly and often waste resources because of idle time during synchronous training. We present xRLHF, the first scalable training framework for synchronous RLHF, built with a centralized learner and serverless rollout actors. xRLHF adapts to dynamic resource demands, pre-computes shared prefixes to avoid repeated computation, and uses a cost-aware actor scaling strategy and efficient workload assignment to reduce cost and idle time. Experiments show that xRLHF speeds up training by 1.14–1.35× while reducing cost by 25.81–44.8\% on the physical cluster with 16 L40S GPUs, and achieves 1.23× speedup with 38.7\% lower cost in the large-scale Vidur simulation.},
       selected={true},
       abbr={SoCC'26}
 }
@@ -45,6 +45,7 @@ abbr={SoCC'25}
       primaryClass={cs.CL},
       doi={10.48550/arXiv.2603.23701},
       url={https://arxiv.org/abs/2603.23701}, 
+      abstract={In Large Language Model (LLM) inference, early-exit refers to stopping computation at an intermediate layer once the prediction is sufficiently confident, thereby reducing latency and cost. However, recent LLMs adopt improved pretraining recipes and architectures that reduce layer redundancy, potentially limiting early-exit opportunities. We re-evaluate layer-wise early-exit in modern LLMs and analyze how intermediate representations evolve during training. We introduce a metric to quantify a model's intrinsic suitability for early-exit and propose a benchmark for researchers to explore the potential early-exit benefits on different models and workloads. Our results show a diminishing trend in early-exit effectiveness across newer model generations. We further find that dense transformers generally offer greater early-exit potential than Mixture-of-Experts and State Space Models. In addition, larger models, particularly those with more than 20 billion parameters, and base pretrained models without specialized tuning tend to exhibit higher early-exit potential.},
       selected={true},
       abbr={arXiv}
 }
