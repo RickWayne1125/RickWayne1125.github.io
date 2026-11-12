@@ -31,4 +31,4 @@ latest_posts:
 
 My research interests include **serverless computing**, **reinforcement learning**, and **machine learning systems**. My goal is to design efficient serverless ML systems for varying types of large-scale AI workloads, especially reinforcement learning tasks.
 
-Recently, I have been actively contributing to [Reef](https://github.com/Human-Agent-Society/reef), an open-source infrastructure project for continually self-improving agents. My contributions focus on model routing, deployment automation, and artifact storage reliability.
+I am also contributing to [Reef](https://github.com/Human-Agent-Society/reef), an open-source infrastructure project for continually self-improving agents, recently.
