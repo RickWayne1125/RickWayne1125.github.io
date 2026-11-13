@@ -3,7 +3,6 @@ layout: page
 title: Reef
 role: Contributor
 description: Reef is open-source infrastructure for continually self-improving agents, connecting inference, feedback, learning, and versioned delivery.
-contribution: I actively contribute to model routing, deployment automation, and artifact storage reliability.
 icon: assets/img/reef-icon.svg
 importance: 1
 category: open source

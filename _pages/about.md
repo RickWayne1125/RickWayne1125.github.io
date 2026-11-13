@@ -14,6 +14,7 @@ profile:
     <p>Hoboken, NJ 07030</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
+github_activity: true
 social: true # includes social icons at the bottom of the page
 
 announcements:
@@ -31,4 +32,4 @@ latest_posts:
 
 My research interests include **serverless computing**, **reinforcement learning**, and **machine learning systems**. My goal is to design efficient serverless ML systems for varying types of large-scale AI workloads, especially reinforcement learning tasks.
 
-I am also contributing to [Reef](https://github.com/Human-Agent-Society/reef), an open-source infrastructure project for continually self-improving agents, recently.
+I am also contributing to [Reef](https://github.com/Human-Agent-Society/reef), an open-source infrastructure project for continually self-improving agents.

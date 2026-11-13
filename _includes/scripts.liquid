@@ -325,3 +325,7 @@
 {% if site.newsletter.enabled %}
   <script defer src="{{ '/assets/js/newsletter.js' | relative_url | bust_file_cache }}"></script>
 {% endif %}
+
+{% if page.github_activity %}
+  <script type="module" src="{{ '/assets/js/github-activity.js' | relative_url | bust_file_cache }}"></script>
+{% endif %}

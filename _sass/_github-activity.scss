@@ -1,0 +1,55 @@
+.github-activity {
+  margin: 2rem 0;
+
+  .github-activity-intro {
+    margin-bottom: 0.5rem;
+  }
+
+  .github-activity-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .github-activity-item {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .github-activity-date,
+  .github-activity-repo {
+    color: var(--global-text-color-light);
+    font-size: 0.9rem;
+  }
+
+  .github-activity-title {
+    font-weight: 500;
+  }
+
+  .github-activity-content {
+    overflow-wrap: anywhere;
+  }
+
+  .github-activity-repo {
+    margin-top: 0.2rem;
+  }
+
+  .github-activity-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 575px) {
+    .github-activity-item {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.2rem;
+    }
+  }
+}

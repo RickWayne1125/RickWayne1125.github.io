@@ -1,0 +1,28 @@
+{% assign github_username = site.data.socials.github_username %}
+<section
+  class="github-activity"
+  aria-labelledby="github-activity-heading"
+  data-github-username="{{ github_username | escape }}"
+  data-github-snapshot-at="{{ site.data.github_activity.fetched_at | escape }}"
+>
+  <h2 id="github-activity-heading">recent GitHub activity</h2>
+  <p class="github-activity-intro">
+    <a href="https://github.com/{{ github_username | escape }}"><i class="fa-brands fa-github" aria-hidden="true"></i> {{ github_username }}</a>
+    <span class="text-muted">&middot; Public contributions</span>
+  </p>
+  <ul class="github-activity-list">
+    {% for activity in site.data.github_activity.entries limit: 6 %}
+      <li class="github-activity-item">
+        <time class="github-activity-date" datetime="{{ activity.date | escape }}">{{ activity.date | date: '%b %d, %Y' }}</time>
+        <div class="github-activity-content">
+          <a class="github-activity-title" href="{{ activity.url | escape }}">{{ activity.title | escape }}</a>
+          <div class="github-activity-repo">{{ activity.repo | escape }}</div>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <p class="github-activity-footer text-muted">
+    <span data-github-activity-updated>Updated {{ site.data.github_activity.fetched_at | date: '%b %d, %Y' }}.</span>
+    <a href="https://github.com/{{ github_username | escape }}?tab=overview">View on GitHub <span aria-hidden="true">&rarr;</span></a>
+  </p>
+</section>

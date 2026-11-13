@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-11-13T04:53:27.447Z",
+  "entries": [
+    {
+      "date": "2026-11-13T03:49:59.000Z",
+      "title": "Opened pull request #1417",
+      "repo": "Human-Agent-Society/reef",
+      "url": "https://github.com/Human-Agent-Society/reef/pull/1417"
+    },
+    {
+      "date": "2026-11-12T06:08:47.000Z",
+      "title": "Merged pull request #1373",
+      "repo": "Human-Agent-Society/reef",
+      "url": "https://github.com/Human-Agent-Society/reef/pull/1373"
+    },
+    {
+      "date": "2026-11-12T00:39:55.000Z",
+      "title": "Opened issue #1374: [Bug] Fix LoRA HF export against the pinned Slime API",
+      "repo": "Human-Agent-Society/reef",
+      "url": "https://github.com/Human-Agent-Society/reef/issues/1374"
+    },
+    {
+      "date": "2026-11-11T22:39:11.000Z",
+      "title": "Opened pull request #1373",
+      "repo": "Human-Agent-Society/reef",
+      "url": "https://github.com/Human-Agent-Society/reef/pull/1373"
+    },
+    {
+      "date": "2026-11-09T23:08:13.000Z",
+      "title": "Pushed to main",
+      "repo": "RickWayne1125/research-deck",
+      "url": "https://github.com/RickWayne1125/research-deck/commit/6a6bf09b61dcb328e72f7737ba5cb7935b0a048a"
+    },
+    {
+      "date": "2026-11-09T20:39:14.000Z",
+      "title": "Opened pull request #1309",
+      "repo": "Human-Agent-Society/reef",
+      "url": "https://github.com/Human-Agent-Society/reef/pull/1309"
+    }
+  ]
+}
