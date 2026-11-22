@@ -183,7 +183,9 @@
   const lookVars = (c) => {
     const L = c.look;
     if (c.kind === "album")
-      return `--cover:${L.cover};--paper:${L.paper};--page-ink:${L.ink};--foil:${L.foil};--foil2:${L.foil2 || L.foil};--corner:${L.corner || L.ink};--e1:${L.e1 || L.paper};--e2:${L.e2 || L.paper}`;
+      return `--cover:${L.cover};--paper:${L.paper};--page-ink:${L.ink};--foil:${L.foil};--foil2:${L.foil2 || L.foil};--corner:${
+        L.corner || L.ink
+      };--e1:${L.e1 || L.paper};--e2:${L.e2 || L.paper}`;
     return c.kind === "prints" ? `--border:${L.border}` : "";
   };
 
@@ -328,7 +330,9 @@
     };
     const facet = (th, fw, r, extra) =>
       h("i", {
-        style: `width:${(fw + 0.7).toFixed(2)}px;margin-left:${(-fw / 2).toFixed(2)}px;transform:rotateY(${th}deg) translateZ(${r}px);--sh:${shade(th)}${extra}`,
+        style: `width:${(fw + 0.7).toFixed(2)}px;margin-left:${(-fw / 2).toFixed(2)}px;transform:rotateY(${th}deg) translateZ(${r}px);--sh:${shade(
+          th
+        )}${extra}`,
       });
     for (let k = 0; k < CAN.N; k++) body.append(facet(((k + 0.5) * 360) / CAN.N - 180, CAN.w, CAN.R, `;--o:${(-k * CAN.w).toFixed(2)}px`));
     const knob = h("div", { class: "can-knob" });
@@ -636,7 +640,9 @@
       cam.ay += (T.ay - cam.ay) * ka;
     }
     const s = Math.exp(cam.ls);
-    bdMap.style.transform = `translate3d(${(cam.ax - cam.mx * s).toFixed(2)}px,${(cam.ay - cam.my * s).toFixed(2)}px,0) scale(${(s / K0).toFixed(5)})`;
+    bdMap.style.transform = `translate3d(${(cam.ax - cam.mx * s).toFixed(2)}px,${(cam.ay - cam.my * s).toFixed(2)}px,0) scale(${(s / K0).toFixed(
+      5
+    )})`;
     pins.forEach((p, i) => {
       if (p)
         p.style.transform = `translate3d(${((PTS[i][0] - cam.mx) * s + cam.ax).toFixed(1)}px,${((PTS[i][1] - cam.my) * s + cam.ay).toFixed(1)}px,0)`;
@@ -1246,7 +1252,11 @@
         const x = e.dx + f * 22 + (o.x || 0);
         const y = e.dy - f * 5 + (o.y || 0);
         const z = (n - 1 - p) * 2.6 + (o.z || 0);
-        return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateZ(${(e.rot + f * 2.2 + (o.r || 0)).toFixed(2)}deg) rotateY(${(o.ry || 0).toFixed(1)}deg)`;
+        return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateZ(${(
+          e.rot +
+          f * 2.2 +
+          (o.r || 0)
+        ).toFixed(2)}deg) rotateY(${(o.ry || 0).toFixed(1)}deg)`;
       };
       const layout = () =>
         order.forEach((i, p) => {

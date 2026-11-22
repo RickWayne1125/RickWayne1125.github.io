@@ -815,8 +815,7 @@ button.frame:hover img {
   height: 184px;
   border-radius: 50%;
   transform: rotateX(90deg);
-  background:
-    radial-gradient(circle, #0e0e10 0 17%, rgba(0, 0, 0, 0) 18%),
+  background: radial-gradient(circle, #0e0e10 0 17%, rgba(0, 0, 0, 0) 18%),
     radial-gradient(circle, rgba(0, 0, 0, 0) 0 62%, rgba(0, 0, 0, 0.3) 63% 65%, rgba(0, 0, 0, 0) 66%),
     conic-gradient(from 30deg, #eceef1, #8b8e95, #f4f5f7, #7c7f86, #dcdee2, #8f9299, #eceef1);
 }
@@ -950,8 +949,7 @@ button.frame:hover img {
   padding: 8% 8% 8% 16%;
   border-radius: 3px 9px 9px 3px;
   color: var(--foil);
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.24)),
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.24)),
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.045) 0 1px, rgba(0, 0, 0, 0) 1px 3px),
     repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.08) 0 1px, rgba(0, 0, 0, 0) 1px 3px), var(--cover);
   box-shadow:

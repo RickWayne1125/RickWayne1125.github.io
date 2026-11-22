@@ -856,7 +856,9 @@
   function viewerBase(stage, theme, grow) {
     const canvas = document.createElement("canvas");
     canvas.className = "gl-view";
-    canvas.style.cssText = `position:absolute;left:${-grow.x * 100}%;top:${-grow.y * 100}%;width:${100 + grow.x * 200}%;height:${100 + grow.y * 200}%`;
+    canvas.style.cssText = `position:absolute;left:${-grow.x * 100}%;top:${-grow.y * 100}%;width:${100 + grow.x * 200}%;height:${
+      100 + grow.y * 200
+    }%`;
     stage.append(canvas);
     const renderer = makeRenderer(canvas);
     renderer.shadowMap.enabled = true;
