@@ -30,6 +30,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
+        },{id: "nav-photography",
+          title: "photography",
+          description: "Photographs kept as collections, each placed on the map where it was shot.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/photography/";
+          },
         },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
