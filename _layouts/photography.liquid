@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+  <!--
+    Standalone layout for /photography/. It keeps the site's metadata and navigation links but loads none of the
+    theme's stylesheets or scripts: the page has its own look (light and dark) in assets/photography/.
+    Collections come from _data/photography.yml.
+  -->
+  <head>
+    {% include metadata.liquid %}
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#0b0d12">
+    <!-- Pick light or dark before anything is painted. The setting is the one the rest of the site stores. -->
+    <script>
+      (function () {
+        var setting = 'system';
+        try {
+          setting = localStorage.getItem('theme') || 'system';
+        } catch (err) {}
+        var dark = setting === 'dark' || (setting !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.setAttribute('data-theme-setting', setting);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      })();
+    </script>
+    {% if site.icon.size <= 4 %}
+      <link
+        rel="shortcut icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>{{ site.icon }}</text></svg>"
+      >
+    {% elsif site.icon != blank %}
+      <link rel="shortcut icon" href="{{ site.icon | prepend: '/assets/img/' | relative_url | bust_file_cache }}">
+    {% endif %}
+    <link rel="canonical" href="{{ page.url | replace: 'index.html', '' | absolute_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    {% if site.data.photography.host %}
+      <link rel="preconnect" href="{{ site.data.photography.host }}">
+    {% endif %}
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,300..700&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap"
+    >
+    <link rel="stylesheet" href="{{ '/assets/photography/photography.css' | relative_url | bust_file_cache }}">
+  </head>
+
+  <body>
+    {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
+    {% assign collections = site.data.photography.collections %}
+
+    <!-- The map that lies under the page. The script draws it and places a pin per collection. -->
+    <div class="backdrop" id="backdrop" data-mode="over">
+      <canvas class="bd-map" id="bd-map" width="2700" height="1322" aria-hidden="true"></canvas>
+    </div>
+
+    <div class="page">
+      <header class="nav">
+        <div class="wrap">
+          <a class="brand" href="{{ '/' | relative_url }}">
+            <strong>{{ site.first_name }}</strong>
+            {% if site.middle_name %}{{ site.middle_name }}{% endif %}
+            {{ site.last_name }}
+          </a>
+          <nav aria-label="Site">
+            {% for p in site.pages %}
+              {% if p.permalink == '/' %}
+                {% assign about_title = p.title %}
+              {% endif %}
+            {% endfor %}
+            <a href="{{ '/' | relative_url }}">{{ about_title | default: 'about' }}</a>
+            {% assign sorted_pages = site.pages | sort: 'nav_order' %}
+            {% for p in sorted_pages %}
+              {% if p.nav and p.autogen == null %}
+                {% if p.dropdown %}
+                  {% for child in p.children %}
+                    {% unless child.title == 'divider' %}
+                      <a href="{% if child.permalink contains '://' %}{{ child.permalink }}{% else %}{{ child.permalink | relative_url }}{% endif %}">
+                        {{- child.title -}}
+                      </a>
+                    {% endunless %}
+                  {% endfor %}
+                {% else %}
+                  {% if p.permalink contains '://' %}
+                    {% assign nav_url = p.permalink %}
+                  {% elsif p.permalink contains '/blog/' %}
+                    {% assign nav_url = '/blog/' | relative_url %}
+                  {% else %}
+                    {% assign nav_url = p.url | relative_url %}
+                  {% endif %}
+                  <a
+                    href="{{ nav_url }}"
+                    {% if p.url == page.url %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                    {{- p.title -}}
+                  </a>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+            <button type="button" class="theme" id="theme-toggle" aria-label="Change colour theme">auto</button>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        <div class="wrap hero">
+          <div class="hero-copy">
+            <p class="kicker" id="stats">{{ collections | size }} collections</p>
+            <h1>Photo<em>graphy</em></h1>
+            {% if page.lede %}
+              <p class="lede">{{ page.lede }}</p>
+            {% endif %}
+            <div class="chips" id="chips" role="group" aria-label="Filter collections by region"></div>
+          </div>
+          <div class="map-win" id="map-win">
+            <i class="vf"></i><i class="vf"></i><i class="vf"></i><i class="vf"></i>
+            <p class="map-hint" id="map-hint" hidden>Select a pin to open that collection</p>
+          </div>
+        </div>
+
+        <section class="wrap shelf" aria-labelledby="shelf-h">
+          <h2 id="shelf-h" class="vh">Collections</h2>
+          <div class="grid" id="grid"></div>
+          <p
+            class="empty"
+            id="empty"
+            {% if collections.size > 0 %}
+              hidden
+            {% endif %}
+          >
+            No collections have been published yet.
+          </p>
+          <noscript>
+            <ul class="plain">
+              {% for c in collections %}
+                <li>
+                  <strong>{{ c.title }}</strong>
+                  {% if c.place %}· {{ c.place }}{% endif %}
+                  {% if c.date %}· {{ c.date }}{% endif %}
+                  <ol>
+                    {% for photo in c.photos %}
+                      {% assign file = photo.full | default: photo.preview %}
+                      <li>
+                        <a href="{% if file contains '://' %}{{ file }}{% else %}{{ site.data.photography.host }}/{{ file }}{% endif %}">
+                          {{- photo.caption | default: photo.alt | default: file -}}
+                        </a>
+                      </li>
+                    {% endfor %}
+                  </ol>
+                </li>
+              {% endfor %}
+            </ul>
+          </noscript>
+        </section>
+      </main>
+
+      <footer class="foot">
+        <div class="wrap">
+          &copy; {{ site.time | date: '%Y' }}
+          {{ author_name }}
+        </div>
+      </footer>
+    </div>
+
+    <dialog id="viewer" aria-labelledby="v-title">
+      <button type="button" class="btn round v-close" id="v-close" aria-label="Close collection">&times;</button>
+      <div class="v-inner" id="v-body"></div>
+    </dialog>
+
+    <dialog id="lb" aria-label="Full-size photograph">
+      <div class="lb-top">
+        <p class="lb-title"><span id="lb-roll"></span><span id="lb-pos"></span></p>
+        <button type="button" class="btn round" id="lb-close" aria-label="Close full-size view">&times;</button>
+      </div>
+      <div class="lb-stage" id="lb-stage">
+        <button type="button" class="btn round lb-arrow" id="lb-prev" aria-label="Previous photograph">&lsaquo;</button>
+        <img id="lb-img" alt="">
+        <button type="button" class="btn round lb-arrow" id="lb-next" aria-label="Next photograph">&rsaquo;</button>
+      </div>
+      <div class="lb-foot">
+        <div class="lb-cap">
+          <p id="lb-cap"></p>
+          <p id="lb-place"></p>
+        </div>
+        <div class="lb-link">
+          <label for="lb-url">Direct link to the full-size file <span id="lb-status" aria-live="polite"></span></label>
+          <div class="lb-link-row">
+            <input id="lb-url" type="text" readonly>
+            <button type="button" class="lb-act" id="lb-copy">Copy link</button>
+            <a class="lb-act ghost" id="lb-open" href="#" target="_blank" rel="noopener">Open</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <script id="ph-data" type="application/json">
+      {{ site.data.photography | jsonify | replace: '</', '<\/' }}
+    </script>
+    <!-- The world outline ships as a map file for jsVectorMap; only its path data is used here. -->
+    <script>
+      window.jsVectorMap = {
+        addMap: function (name, data) {
+          window.__phWorld = data;
+        },
+      };
+    </script>
+    <script
+      defer
+      src="{{ site.third_party_libraries.jsvectormap-world.url.js }}"
+      integrity="{{ site.third_party_libraries.jsvectormap-world.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
+    <!-- Optional: with three.js present the objects are drawn with WebGL; without it the page uses its CSS 3D version. -->
+    <script
+      defer
+      src="{{ site.third_party_libraries.three.url.js }}"
+      integrity="{{ site.third_party_libraries.three.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="{{ '/assets/photography/photography-gl.js' | relative_url | bust_file_cache }}"></script>
+    <script defer src="{{ '/assets/photography/photography.js' | relative_url | bust_file_cache }}"></script>
+  </body>
+</html>

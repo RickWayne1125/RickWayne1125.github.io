@@ -75,17 +75,10 @@
       "endDate": "2022-07-01"
     }
   ],
-  "awards": [
-  ],
-  "certificates": [
-
-  ],
-  "publications": [
- 
-  ],
-  "skills": [
-
-  ],
+  "awards": [],
+  "certificates": [],
+  "publications": [],
+  "skills": [],
   "languages": [
     {
       "language": "German",

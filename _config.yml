@@ -231,7 +231,8 @@ sass:
 
 jekyll-minifier:
   compress_javascript: false # set to false since we are using terser as the js minifier
-  exclude: ["robots.txt", "assets/js/search/*.js"]
+  # the photography styles rely on calc() with zero-unit values, which the CSS minifier rewrites
+  exclude: ["robots.txt", "assets/js/search/*.js", "assets/photography/*.css"]
 
 # -----------------------------------------------------------------------------
 # Terser
@@ -323,7 +324,7 @@ filtered_bibtex_keywords:
   ]
 
 # Maximum number of authors to be shown for each publication (more authors are visible on click)
-max_author_limit:  # leave blank to always show all authors
+max_author_limit: # leave blank to always show all authors
 more_authors_animation_delay: 10 # more authors are revealed on click using animation; smaller delay means faster animation
 
 # Enables publication thumbnails. If disabled, none of the publications will display thumbnails, even if specified in the bib entry.
@@ -473,6 +474,12 @@ third_party_libraries:
     url:
       js: "https://cdn.jsdelivr.net/npm/jquery@{{version}}/dist/jquery.min.js"
     version: "3.6.0"
+  jsvectormap-world: # world outline used by the map on the photography page
+    integrity:
+      js: "sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/jsvectormap@{{version}}/dist/maps/world.js"
+    version: "1.5.3"
   leaflet:
     integrity:
       css: "sha256-q9ba7o845pMPFU+zcAll8rv+gC+fSovKsOoNQ6cynuQ="
@@ -587,6 +594,12 @@ third_party_libraries:
     url:
       js: "https://cdn.jsdelivr.net/npm/swiper@11.1.0/swiper-element-bundle.min.js.map"
     version: "11.0.5"
+  three: # WebGL renderer for the objects on the photography page
+    integrity:
+      js: "sha256-knS7zsjZYWhibHMrXTHHdaqM+36qBZm+wMF1kIosHOI="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/three@{{version}}/build/three.min.js"
+    version: "0.128.0"
   vega:
     integrity:
       js: "sha256-Yot/cfgMMMpFwkp/5azR20Tfkt24PFqQ6IQS+80HIZs="

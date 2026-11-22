@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# Prepare a folder of exported photographs for the photography page.
+#
+#   bin/photography-add <folder-of-jpegs> <collection-id> <photos-project-dir>
+#
+# For every JPEG in the folder, in file-name order, this writes into <photos-project-dir>/public/<collection-id>/:
+#   NN.jpg        the file as exported (opened and linked at full size)
+#   NN-1600.jpg   preview, long edge 1600 px (shown while browsing)
+#   NN-640.jpg    thumbnail, long edge 640 px (shown in the grid)
+# and prints the `photos:` block to paste under the collection in _data/photography.yml.
+# Afterwards publish the images from the photos project (see its README).
+#
+# Uses `sips`, which ships with macOS. The full-size file is copied untouched, so it keeps whatever metadata the
+# export contains (camera, lens, GPS position if it was not removed on export).
+set -euo pipefail
+
+if [ "$#" -ne 3 ]; then
+  sed -n '2,5p' "$0" | sed 's/^# \{0,1\}//'
+  exit 64
+fi
+src=${1%/}
+id=$2
+dest="${3%/}/public/$id"
+
+command -v sips >/dev/null || { echo "sips not found (this script needs macOS)" >&2; exit 69; }
+[ -d "$src" ] || { echo "not a folder: $src" >&2; exit 66; }
+[ -d "${3%/}/public" ] || { echo "no public/ folder in: $3" >&2; exit 66; }
+case "$id" in
+  *[!a-z0-9-]* | "") echo "collection id may only use a-z, 0-9 and -: $id" >&2; exit 64 ;;
+esac
+# published files keep their URLs, so an existing collection is never overwritten
+if [ -e "$dest" ]; then
+  echo "already exists, not touching it: $dest" >&2
+  exit 73
+fi
+
+shopt -s nullglob nocaseglob
+files=("$src"/*.jpg "$src"/*.jpeg)
+shopt -u nocaseglob
+if [ "${#files[@]}" -eq 0 ]; then
+  echo "no .jpg / .jpeg files in: $src" >&2
+  exit 66
+fi
+IFS=$'\n' files=($(printf '%s\n' "${files[@]}" | sort))
+unset IFS
+
+mkdir -p "$dest"
+echo "    photos:"
+i=0
+for f in "${files[@]}"; do
+  i=$((i + 1))
+  n=$(printf '%02d' "$i")
+  cp "$f" "$dest/$n.jpg"
+  sips -Z 1600 -s format jpeg -s formatOptions 82 "$f" --out "$dest/$n-1600.jpg" >/dev/null
+  sips -Z 640 -s format jpeg -s formatOptions 80 "$f" --out "$dest/$n-640.jpg" >/dev/null
+  w=$(sips -g pixelWidth "$f" | awk '/pixelWidth/ { print $2 }')
+  h=$(sips -g pixelHeight "$f" | awk '/pixelHeight/ { print $2 }')
+  echo "      - full: $id/$n.jpg"
+  echo "        preview: $id/$n-1600.jpg"
+  echo "        thumb: $id/$n-640.jpg"
+  echo "        width: $w"
+  echo "        height: $h"
+  echo "        alt: \"\" # describe the photograph ($(basename "$f"))"
+  echo "        caption: \"\""
+done
+echo "wrote $i photographs to $dest" >&2
