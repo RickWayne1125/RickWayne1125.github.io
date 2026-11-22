@@ -1,0 +1,36 @@
+# Photography collections shown on /photography/.
+#
+# Image files live in the separate Cloudflare project (cloudflare-photos/public) and are served from `host`.
+# Paths below are relative to `host`, so public/hudson-blue-hour/01.jpg is written as hudson-blue-hour/01.jpg.
+# `bin/photography-add` copies a folder of exports into that project, makes the smaller sizes and prints the `photos:` block.
+#
+# Each collection appears in the grid in the order listed here. Example:
+#
+# collections:
+#   - id: hudson-blue-hour # used in the page link: /photography/#hudson-blue-hour
+#     title: Hudson Blue Hour
+#     kind: roll # roll | album | prints (the object the collection is shown as)
+#     place: Hoboken, New Jersey
+#     pin: Hoboken # short label on the map (defaults to the first part of `place`)
+#     country: US # ISO 3166-1 alpha-2 code, tints that country on the map (optional)
+#     region: North America # filter button (optional)
+#     date: October 2026
+#     coords: [40.74, -74.03] # latitude, longitude; leave out to skip the map pin
+#     note: The Manhattan skyline from the Hoboken piers, from sunset until the office lights come on.
+#     film: RW 400 # printed on the canister and the film edge (roll only, optional)
+#     photos: # in display order
+#       - full: hudson-blue-hour/01.jpg # opened and linked at full size
+#         preview: hudson-blue-hour/01-1600.jpg # shown while browsing (falls back to `full`)
+#         thumb: hudson-blue-hour/01-640.jpg # shown in the grid (falls back to `preview`)
+#         width: 6000 # pixel size of the full file (optional, avoids layout shift)
+#         height: 4000
+#         alt: Manhattan skyline at sunset seen across the Hudson
+#         caption: Pier A, twenty minutes before sunset. # optional
+#
+# Colours are picked automatically per kind. To override them add a `look:` map to the collection:
+#   roll:   look: { label: ["#e9a43f", "#17130e"] }            # label colour, ink colour
+#   album:  look: { cover: "#a5482f", paper: "#efe7d6", ink: "#2b2219", foil: "#f6e3b4" }
+#   prints: look: { border: "#f2efe8" }
+
+host: https://img.waynetech.site
+collections: []
