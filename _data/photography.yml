@@ -11,11 +11,9 @@
 #     title: Hudson Blue Hour
 #     kind: roll # roll | album | prints (the object the collection is shown as)
 #     place: Hoboken, New Jersey
-#     pin: Hoboken # short label on the map (defaults to the first part of `place`)
-#     country: US # ISO 3166-1 alpha-2 code, tints that country on the map (optional)
-#     region: North America # filter button (optional)
+#     pin: Hoboken # short label on the globe (defaults to the first part of `place`)
 #     date: October 2026
-#     coords: [40.74, -74.03] # latitude, longitude; leave out to skip the map pin
+#     coords: [40.74, -74.03] # latitude, longitude; leave out to skip the pin on the globe
 #     note: The Manhattan skyline from the Hoboken piers, from sunset until the office lights come on.
 #     film: RW 400 # printed on the canister and the film edge (roll only, optional)
 #     photos: # in display order
@@ -26,6 +24,13 @@
 #         height: 4000
 #         alt: Manhattan skyline at sunset seen across the Hudson
 #         caption: Pier A, twenty minutes before sunset. # optional
+#         coords: [40.74, -74.03] # where this photograph was taken (optional): a stop on the collection's route
+#         place: Hoboken # the name of that stop (optional)
+#         subject: landscape # food | people | landscape | animals (optional), see below
+#
+# The page has two ways in. "Journeys" are the collections listed here: opening one turns the globe to it and joins
+# the places of its photographs with arcs, in order. "Subjects" are not listed anywhere: each of the four gathers,
+# from every collection, the photographs that carry its name in `subject`.
 #
 # Colours are picked automatically per kind. To override them add a `look:` map to the collection:
 #   roll:   look: { label: ["#e9a43f", "#17130e"] }            # label colour, ink colour

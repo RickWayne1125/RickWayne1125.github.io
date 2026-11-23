@@ -37,7 +37,7 @@
     {% endif %}
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,300..700&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..110,300..700&family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Caveat:wght@500..700&display=swap"
     >
     <link rel="stylesheet" href="{{ '/assets/photography/photography.css' | relative_url | bust_file_cache }}">
   </head>
@@ -46,9 +46,15 @@
     {% capture author_name %}{{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} {{ site.last_name }}{% endcapture %}
     {% assign collections = site.data.photography.collections %}
 
-    <!-- The map that lies under the page. The script draws it and places a pin per collection. -->
+    <!-- The globe under the page. The script draws it and places a pin per collection. -->
     <div class="backdrop" id="backdrop" data-mode="over">
-      <canvas class="bd-map" id="bd-map" width="2700" height="1322" aria-hidden="true"></canvas>
+      <canvas
+        class="bd-map"
+        id="bd-map"
+        data-world="{{ site.third_party_libraries.world-atlas.url.coarse }}"
+        data-world-detail="{{ site.third_party_libraries.world-atlas.url.detail }}"
+        aria-hidden="true"
+      ></canvas>
     </div>
 
     <div class="page">
@@ -109,7 +115,7 @@
             {% if page.lede %}
               <p class="lede">{{ page.lede }}</p>
             {% endif %}
-            <div class="chips" id="chips" role="group" aria-label="Filter collections by region"></div>
+            <div class="chips" id="chips" role="group" aria-label="Journeys or subjects"></div>
           </div>
           <div class="map-win" id="map-win">
             <i class="vf"></i><i class="vf"></i><i class="vf"></i><i class="vf"></i>
@@ -195,18 +201,23 @@
     <script id="ph-data" type="application/json">
       {{ site.data.photography | jsonify | replace: '</', '<\/' }}
     </script>
-    <!-- The world outline ships as a map file for jsVectorMap; only its path data is used here. -->
-    <script>
-      window.jsVectorMap = {
-        addMap: function (name, data) {
-          window.__phWorld = data;
-        },
-      };
-    </script>
+    <!-- The globe is drawn with d3-geo from world-atlas outlines. Without these the page works, with no map. -->
     <script
       defer
-      src="{{ site.third_party_libraries.jsvectormap-world.url.js }}"
-      integrity="{{ site.third_party_libraries.jsvectormap-world.integrity.js }}"
+      src="{{ site.third_party_libraries.d3-array.url.js }}"
+      integrity="{{ site.third_party_libraries.d3-array.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="{{ site.third_party_libraries.d3-geo.url.js }}"
+      integrity="{{ site.third_party_libraries.d3-geo.integrity.js }}"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="{{ site.third_party_libraries.topojson-client.url.js }}"
+      integrity="{{ site.third_party_libraries.topojson-client.integrity.js }}"
       crossorigin="anonymous"
     ></script>
     <!-- Optional: with three.js present the objects are drawn with WebGL; without it the page uses its CSS 3D version. -->
@@ -216,6 +227,8 @@
       integrity="{{ site.third_party_libraries.three.integrity.js }}"
       crossorigin="anonymous"
     ></script>
+    <script defer src="{{ '/assets/photography/photography-globe.js' | relative_url | bust_file_cache }}"></script>
+    <script defer src="{{ '/assets/photography/photography-subjects.js' | relative_url | bust_file_cache }}"></script>
     <script defer src="{{ '/assets/photography/photography-gl.js' | relative_url | bust_file_cache }}"></script>
     <script defer src="{{ '/assets/photography/photography.js' | relative_url | bust_file_cache }}"></script>
   </body>
