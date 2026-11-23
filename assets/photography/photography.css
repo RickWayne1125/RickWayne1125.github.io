@@ -785,8 +785,10 @@ button.frame {
   height: 100%;
   border-radius: 3px;
 }
-button.frame:hover img {
-  filter: brightness(1.12);
+/* a frame under the pointer is outlined, not brightened: photographs keep their colours */
+button.frame:hover {
+  outline: 2px solid var(--amber);
+  outline-offset: 1px;
 }
 .edge {
   position: absolute;
@@ -1992,14 +1994,6 @@ button.frame:hover img {
   height: 100%;
   object-fit: cover;
 }
-/* the glass darkens towards its corners */
-.vf-glass::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.55));
-  pointer-events: none;
-}
 /* bright frame lines: four corners */
 .vf-lines {
   position: absolute;
@@ -2152,14 +2146,6 @@ button.frame:hover img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-}
-/* lamp light: warm in the middle, falling off to the edges */
-.pj-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 50% 45%, rgba(255, 240, 205, 0.14), rgba(0, 0, 0, 0.28));
-  pointer-events: none;
 }
 .pj-slide.out {
   transform: translateY(-112%);
