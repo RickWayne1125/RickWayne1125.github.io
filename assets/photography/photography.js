@@ -3,9 +3,12 @@
  *
  * The layout embeds the data as JSON (#ph-data). When that data names a `manifest`, the same kind of file is also
  * fetched from the image host as the page loads, so collections published there appear without rebuilding the site.
- * Each collection becomes a grid cell (a film roll, an album or a pile
- * of prints) and a pin on the map canvas behind the page. Opening a collection flies the map to its coordinates and
- * shows the full object in a dialog. Browsing uses the `preview` files; the `full` file is only requested when a
+ * A collection is a journey. Each becomes a grid cell (a film roll, an album or a pile
+ * of prints) and a pin on the globe behind the page (photography-globe.js). Every photograph also has a subject
+ * (food, people, landscape, animals); the four subjects gather the photographs of all journeys and show them each in
+ * its own way (photography-subjects.js). The page shows either the journeys or the subjects, never both mixed. Opening a collection turns the globe to
+ * where it was shot, draws arcs between the places its photographs were taken and marks the place of the one being
+ * looked at; the full object is shown in a dialog. Browsing uses the `preview` files; the `full` file is only requested when a
  * photograph is opened at full size.
  *
  * Every object is first built from plain elements with CSS 3D transforms. Where WebGL is available and the image host
@@ -146,6 +149,8 @@
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
   const KIND = { roll: "35mm roll", album: "Album", prints: "Loose prints" };
+  const latLng = (v) =>
+    Array.isArray(v) && v.length === 2 && v.every((n) => typeof n === "number" && isFinite(n)) && Math.abs(v[0]) <= 90 ? [v[0], v[1]] : null;
   // default colours, taken in turn so two collections of the same kind do not look alike
   const LOOKS = {
     roll: [
@@ -177,20 +182,21 @@
           alt: p.alt || "",
           caption: p.caption || "",
           ratio: p.width > 0 && p.height > 0 ? p.width / p.height : 0,
+          coords: latLng(p.coords),
+          place: p.place || "",
+          subject: p.subject || "",
         }));
       if (!photos.length) return null;
       const place = c.place || "";
       const defaults = LOOKS[kind][seen[kind]++ % LOOKS[kind].length];
-      const coords =
-        Array.isArray(c.coords) && c.coords.length === 2 && c.coords.every((v) => typeof v === "number" && isFinite(v)) ? c.coords : null;
+      const coords = latLng(c.coords);
       return {
         id: slug(c.id || c.title) || "collection-" + (i + 1),
         kind,
         title: c.title || "Untitled",
         place,
         pin: c.pin || place.split(",")[0] || c.title || "",
-        country: String(c.country || "").toUpperCase(),
-        region: c.region || "",
+        trail: true, // a journey: arcs join its places in the order of its photographs
         date: c.date || "",
         coords,
         note: c.note || "",
@@ -205,6 +211,43 @@
   const fmtCoords = ([lat, lng]) => `${Math.abs(lat).toFixed(2)}°${lat >= 0 ? "N" : "S"} ${Math.abs(lng).toFixed(2)}°${lng >= 0 ? "E" : "W"}`;
   const dotted = (...parts) => parts.filter(Boolean).join(" · ");
   const count = (n, one) => `${n} ${one}${n === 1 ? "" : "s"}`;
+  /*
+   * The four subjects. Nobody makes these: each gathers, from every journey, the photographs sorted into it. They
+   * sit in the same list as the journeys (after them), so that opening one, its places on the globe and its link
+   * work the same way; `subject` tells them apart.
+   */
+  const SUBJ = window.PhotographySubjects || null;
+  const JOURNEYS = COLS.length;
+  if (SUBJ)
+    for (const s of [
+      { key: "food", title: "Food", kind: "table", note: "Whatever was on the table, wherever the table was." },
+      { key: "people", title: "People", kind: "projector", note: "Streets, faces, and the things people build." },
+      { key: "landscape", title: "Landscape", kind: "finder", note: "Wide views, mostly with nobody in them." },
+      { key: "animals", title: "Animals", kind: "notebook", note: "Whoever happened to be there." },
+    ]) {
+      const photos = COLS.slice(0, JOURNEYS).flatMap((c) =>
+        c.photos.filter((p) => p.subject === s.key).map((p) => Object.assign({}, p, { from: c.title, when: c.date }))
+      );
+      if (!photos.length) continue;
+      const places = new Set(photos.map((p) => p.place).filter(Boolean)).size;
+      const from = new Set(photos.map((p) => p.from)).size;
+      COLS.push({
+        id: COLS.some((c) => c.id === s.key) ? "subject-" + s.key : s.key,
+        subject: s.key,
+        kind: s.kind,
+        title: s.title,
+        place: dotted(places ? count(places, "place") : "", count(from, "journey")),
+        pin: s.title,
+        trail: false, // not a journey: its places are shown without lines between them
+        date: "",
+        coords: null,
+        note: s.note,
+        film: "",
+        look: {},
+        photos,
+      });
+    }
+  const LABEL = Object.assign({ table: "Subject", finder: "Subject", projector: "Subject", notebook: "Subject" }, KIND);
   const lookVars = (c) => {
     const L = c.look;
     if (c.kind === "album")
@@ -444,78 +487,113 @@
     ...leaves,
   ];
 
-  /* ---------- the map under the page ---------- */
-  const WORLD = window.__phWorld || null;
-  const MAPW = 900;
-  const MAPH = 440.706;
-  const K0 = 3; // canvas pixels per map unit
-  // Miller projection centred on 11.5°E, matching the world outline data; returns map units (900 wide).
-  function mapXY([lat, lng]) {
-    const R = 6381372;
-    const RAD = Math.PI / 180;
-    const x0 = -20004297.15;
-    const x1 = 20026572.39;
-    const y0 = -12671671.12;
-    const y1 = 6930392.03;
-    let l = lng - 11.5;
-    if (l < -180) l += 360;
-    return [((R * l * RAD - x0) / (x1 - x0)) * MAPW, (((-R * Math.log(Math.tan((45 + 0.4 * lat) * RAD))) / 0.8 - y0) / (y1 - y0)) * MAPH];
-  }
-  const PTS = COLS.map((c) => (c.coords ? mapXY(c.coords) : null));
+  /* ---------- the globe under the page ---------- */
   const backdrop = $("#backdrop");
   const bdMap = $("#bd-map");
   const mapWin = $("#map-win");
-  const worldPaths = WORLD && WORLD.paths && window.Path2D ? Object.entries(WORLD.paths).map(([code, p]) => [code, new Path2D(p.path)]) : [];
-  // painted again whenever the theme changes: the colours come from the stylesheet
-  function drawWorld() {
-    const ctx = bdMap.getContext("2d");
-    const css = getComputedStyle(root);
-    const v = (k) => css.getPropertyValue(k).trim();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, bdMap.width, bdMap.height);
-    ctx.setTransform(K0, 0, 0, K0, 0, 0);
-    ctx.lineWidth = 0.3;
-    ctx.strokeStyle = v("--grid-line");
-    ctx.beginPath();
-    for (let lng = -150; lng <= 180; lng += 30) {
-      const x = mapXY([0, lng])[0];
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, MAPH);
-    }
-    for (let lat = -45; lat <= 75; lat += 15) {
-      const y = mapXY([lat, 0])[1];
-      ctx.moveTo(0, y);
-      ctx.lineTo(MAPW, y);
-    }
-    ctx.stroke();
-    const on = new Set(COLS.map((c) => c.country).filter(Boolean));
-    ctx.lineWidth = 0.35;
-    ctx.lineJoin = "round";
-    ctx.strokeStyle = v("--coast");
-    for (const [code, path] of worldPaths) {
-      ctx.fillStyle = on.has(code) ? v("--land-on") : v("--land");
-      ctx.fill(path);
-      ctx.stroke(path);
-    }
+  const GLOBE = window.PhotographyGlobe ? window.PhotographyGlobe.create({ canvas: bdMap, root }) : null;
+  const RAD = Math.PI / 180;
+  const unit = ([lat, lng]) => {
+    const k = Math.cos(lat * RAD);
+    return [k * Math.cos(lng * RAD), k * Math.sin(lng * RAD), Math.sin(lat * RAD)];
+  };
+  const apart = (a, b) => Math.acos(clamp(a[0] * b[0] + a[1] * b[1] + a[2] * b[2], -1, 1));
+  const wrap = (deg) => ((((deg + 180) % 360) + 360) % 360) - 180;
+  // the middle of some places, and how far (in radians) the furthest of them is from it
+  function spread(points) {
+    const us = points.map(unit);
+    const sum = us.reduce((s, u) => [s[0] + u[0], s[1] + u[1], s[2] + u[2]], [0, 0, 0]);
+    const len = Math.hypot(sum[0], sum[1], sum[2]);
+    const mid = len > 1e-6 ? [Math.asin(clamp(sum[2] / len, -1, 1)) / RAD, Math.atan2(sum[1], sum[0]) / RAD] : points[0];
+    const m = unit(mid);
+    return { mid, r: Math.max(0, ...us.map((u) => apart(m, u))) };
   }
-  drawWorld();
-  const pins = COLS.map((c, i) => {
-    if (!PTS[i]) return null;
-    const p = h(
-      "button",
-      { class: "pin", type: "button", "aria-label": `${dotted(c.title, c.place)}. Open this collection.` },
-      h("b"),
-      h("b"),
-      h("b"),
-      h("i"),
-      h("span", { text: c.pin })
+  /*
+   * The places of a collection: where its photographs were taken, in the order they are shown. Photographs taken
+   * within a few kilometres of each other share a stop; a photograph without a position stays where the one before
+   * it was. A collection whose photographs carry no positions has one stop, its own place.
+   * The stops of a journey are joined by arcs, in order. A subject (animals, say, from wherever they were met) is
+   * not a journey: its places are shown without lines between them.
+   */
+  const NEAR = 0.0007; // radians, about 4.5 km
+  function routeOf(c) {
+    if (!GLOBE) return null;
+    const stops = [];
+    let order = [];
+    const stopOf = [];
+    const pos = [];
+    c.photos.forEach((p, fi) => {
+      pos[fi] = stopOf[fi] = -1;
+      if (!p.coords) return;
+      const u = unit(p.coords);
+      let k = stops.findIndex((s) => apart(s.u, u) < NEAR);
+      if (k < 0) k = stops.push({ lat: p.coords[0], lng: p.coords[1], u, label: p.place }) - 1;
+      else if (!stops[k].label) stops[k].label = p.place;
+      if (order[order.length - 1] !== k) order.push(k);
+      pos[fi] = order.length - 1;
+      stopOf[fi] = k;
+    });
+    if (!stops.length) {
+      if (!c.coords) return null;
+      stops.push({ lat: c.coords[0], lng: c.coords[1], u: unit(c.coords), label: c.pin });
+      order.push(0);
+    }
+    if (!c.trail) {
+      order = stops.map((_, k) => k);
+      stopOf.forEach((k, fi) => (pos[fi] = k));
+    }
+    let at = Math.max(0, pos.find((v) => v >= 0) || 0);
+    for (let fi = 0; fi < pos.length; fi++) {
+      if (pos[fi] < 0) pos[fi] = at;
+      else at = pos[fi];
+    }
+    const sp = spread(stops.map((s) => [s.lat, s.lng]));
+    return Object.assign(GLOBE.makeRoute(stops, order, !c.trail), { pos, mid: sp.mid, r: sp.r });
+  }
+  const ROUTES = COLS.map(routeOf);
+  if (GLOBE)
+    GLOBE.setPlaces(
+      COLS.flatMap((c, i) => (ROUTES[i] ? ROUTES[i].stops.map((s) => [s.lat, s.lng]) : [])).concat(COLS.map((c) => c.coords).filter(Boolean))
     );
-    p.addEventListener("click", () => openCollection(i));
-    backdrop.append(p);
-    return p;
+  /*
+   * The pins on the globe. A collection has one, at its place. One whose photographs come from places far apart
+   * without making a journey has one at each of those places, all opening the same collection.
+   */
+  const FAR = 0.04; // radians, about 250 km
+  const SPOTS = COLS.map((c, i) => {
+    if (!GLOBE) return [];
+    const r = ROUTES[i];
+    if (r && !c.trail && r.stops.length > 1) {
+      const out = [];
+      for (const s of r.stops) if (!out.some((o) => apart(o.u, s.u) < FAR)) out.push({ lat: s.lat, lng: s.lng, u: s.u, label: s.label || c.pin });
+      return out.slice(0, 10);
+    }
+    return c.coords ? [{ lat: c.coords[0], lng: c.coords[1], u: unit(c.coords), label: c.pin }] : [];
   });
+  const PINS = SPOTS.flatMap((list, ci) =>
+    list.map((s) => {
+      const c = COLS[ci];
+      const el = h(
+        "button",
+        // one of several pins of the same collection is a plain dot; its name shows when the collection is pointed at
+        {
+          class: list.length > 1 ? "pin minor" : "pin",
+          type: "button",
+          "aria-label": `${dotted(c.title, list.length > 1 ? s.label : c.place)}. Open this collection.`,
+        },
+        h("b"),
+        h("b"),
+        h("b"),
+        h("i"),
+        h("span", { text: s.label })
+      );
+      el.addEventListener("click", () => openCollection(ci));
+      backdrop.append(el);
+      return { ci, s, el };
+    })
+  );
 
-  /* ---------- motion: one loop drives the map camera and every tilting object ---------- */
+  /* ---------- motion: one loop drives the globe and every tilting object ---------- */
   const tilts = new Set();
   // `el` leans towards the pointer while it is over `zone`; sx / sy add a lean that follows the scroll position
   function addTilt(el, zone, o) {
@@ -534,106 +612,133 @@
     tilts.add(t);
     return t;
   }
-  // camera: a point on screen is (map point - m) * s + a
-  const cam = { ls: 0, mx: 450, my: 200, ax: 0, ay: 0, ready: false };
+  // the view of the globe: the place facing the viewer (degrees), the disc's radius (as its logarithm, so that
+  // zooming eases evenly) and where on screen the disc's centre is
+  const cam = { lam: 0, phi: 18, lr: 5, cx: 0, cy: 0, ready: false };
   let target = null;
   let modeKey = "";
   let raf = 0;
+  let lastFrame = 0;
   let scrollDirty = true;
   let openIdx = -1;
   let vAnchor = null;
+  let openedAt = 0;
+  let photoPos = -1; // where along the open collection's route the current photograph is
+  let hop = null;
+  let hotIdx = -1; // the collection whose cell or pin has the pointer
+  let spinLam = PINS.length ? PINS[0].s.lng : 0; // where the idle turn has got to
+  let handPhi = null; // the tilt left by dragging the globe
+  let holdUntil = 0; // no idle turn before this time
   const cells = [];
   const hiddenCell = (i) => !!cells[i] && cells[i].hidden;
   function computeTarget() {
     const vw = root.clientWidth;
     const vh = innerHeight;
-    // an open collection: its place sits under the object
-    if (openIdx >= 0 && vAnchor && PTS[openIdx]) {
-      const a = vAnchor.getBoundingClientRect();
-      return {
-        key: "open",
-        idx: openIdx,
-        s: clamp(vw / 250, 3.3, 5.2),
-        mx: PTS[openIdx][0],
-        my: PTS[openIdx][1],
-        ax: a.left + a.width / 2,
-        ay: clamp(a.top + a.height / 2, vh * 0.3, vh * 0.7),
-      };
+    /*
+     * An open collection. The top of the window is kept clear for the globe (the viewer leaves that much room
+     * above its content), and the places are looked at from the south, at a slant, so that the arcs stand up from
+     * the ground instead of lying flat under the eye.
+     *  - Places that fit on one side of the globe are framed whole in that space, however near or far apart they
+     *    are: the view comes as close as it can with every stop, every arc and the labels still inside. It then
+     *    stays put; the current stop is marked on it.
+     *  - Places across much of the world do not fit on one side: the globe then stands behind the content as a
+     *    dome and turns to bring the current stop to the front, the arcs running off over the horizon.
+     */
+    const route = openIdx >= 0 ? ROUTES[openIdx] : null;
+    if (route) {
+      const stage = Math.max(parseFloat(getComputedStyle(vBody).paddingTop) || 0, vh * 0.24);
+      if (route.r < 1) {
+        const lam = route.mid[1];
+        const phi = Math.max(route.mid[0] - 30, -89);
+        const b = GLOBE.bounds(route, lam, phi);
+        if (b) {
+          const left = clamp(vw * 0.08, 24, 120);
+          const right = left + (vw > 700 ? 96 : 64); // labels stand to the right of their stops
+          const top = 44;
+          const bottom = 28;
+          const w = Math.max(vw - left - right, 80);
+          const hgt = Math.max(stage - top - bottom, 60);
+          const R = Math.min(w / Math.max(b.x1 - b.x0, 1e-7), hgt / Math.max(b.y1 - b.y0, 1e-7), route.stops.length > 1 ? 4e5 : 3600);
+          return { key: "open", idx: openIdx, lam, phi, R, cx: left + w / 2 - (R * (b.x0 + b.x1)) / 2, cy: top + hgt / 2 - (R * (b.y0 + b.y1)) / 2 };
+        }
+      }
+      const s = route.stops[route.order[Math.max(photoPos, 0)]];
+      const R = stage * 1.75;
+      const phi = Math.max(s.lat - 55, -89);
+      return { key: "open", idx: openIdx, lam: s.lng, phi, R, cx: vw / 2, cy: stage * 0.38 + R * Math.sin((s.lat - phi) * RAD) };
     }
     const win = mapWin.getBoundingClientRect();
-    // while the hero is on screen: every visible pin fits inside the viewfinder
+    const hotSpot = hotIdx >= 0 && SPOTS[hotIdx][0] && !hiddenCell(hotIdx) ? SPOTS[hotIdx][0] : null;
+    // while the hero is on screen: the globe sits in the viewfinder
     if (openIdx < 0 && win.bottom > vh * 0.28) {
-      const vis = COLS.map((c, i) => i).filter((i) => PTS[i] && !hiddenCell(i));
-      if (!vis.length)
-        return {
-          key: "over",
-          idx: -1,
-          s: Math.max(Math.min(win.width / MAPW, win.height / 330), 0.02),
-          mx: 450,
-          my: 190,
-          ax: win.left + win.width / 2,
-          ay: win.top + win.height / 2,
-          vis,
-        };
-      const xs = vis.map((i) => PTS[i][0]);
-      const ys = vis.map((i) => PTS[i][1]);
-      const x0 = Math.min(...xs);
-      const x1 = Math.max(...xs);
-      const y0 = Math.min(...ys);
-      const y1 = Math.max(...ys);
-      return {
-        key: "over",
-        idx: -1,
-        s: clamp(Math.min(win.width / (x1 - x0 + 150), (win.height - 30) / (y1 - y0 + 70)), 0.25, 3.2),
-        mx: (x0 + x1) / 2 + 14,
-        my: (y0 + y1) / 2,
-        ax: win.left + win.width / 2,
-        ay: win.top + win.height / 2 - 8,
-        vis,
-      };
+      const vis = PINS.map((p, k) => k).filter((k) => !hiddenCell(PINS[k].ci));
+      const cx = win.left + win.width / 2;
+      const cy = win.top + win.height / 2;
+      const base = clamp(win.height * 0.6, 100, Math.max(100, win.width * 0.5));
+      const held = performance.now() < holdUntil;
+      const phi = handPhi == null ? 18 : handPhi;
+      if (hotSpot && !held) return { key: "over", idx: -1, lam: hotSpot.lng, phi: clamp(hotSpot.lat, -55, 62), R: base, cx, cy, vis };
+      const sp = vis.length ? spread(vis.map((k) => [PINS[k].s.lat, PINS[k].s.lng])) : null;
+      // the pins are too far apart to sit well on one side of the globe (or it has been turned by hand): it turns
+      // slowly, or rests
+      if (!sp || sp.r > 0.8 || held || handPhi != null)
+        return { key: "over", idx: -1, lam: spinLam, phi, R: base, cx, cy, vis, spin: !REDUCED && !held };
+      const R = clamp((0.4 * win.height) / Math.sin(Math.min(sp.r + 0.16, Math.PI / 2)), base, Math.max(base, win.width * 0.9));
+      return { key: "over", idx: -1, lam: sp.mid[1], phi: sp.mid[0], R, cx, cy, vis };
     }
-    // further down the page: the whole world, dimmed, behind the grid
-    return { key: "wide", idx: -1, s: Math.max(vw / MAPW, vh / MAPH, 0.02) * 1.04, mx: 450, my: 205, ax: vw / 2, ay: vh / 2 };
+    // further down the page: the globe fills the background, dimmed, turned to whatever has the pointer
+    return {
+      key: "wide",
+      idx: -1,
+      lam: hotSpot ? hotSpot.lng : spinLam,
+      phi: hotSpot ? clamp(hotSpot.lat, -40, 50) : 18,
+      R: Math.max(vw, vh) * 0.7,
+      cx: vw / 2,
+      cy: vh * 0.56,
+    };
   }
   function applyMode(T) {
-    const key = T.key + T.idx + (T.vis ? T.vis.join("") : "");
+    const key = T.key + T.idx + (T.spin ? "s" : "") + (T.vis ? T.vis.join(".") : "");
     if (key === modeKey) return;
     modeKey = key;
     backdrop.dataset.mode = T.key;
-    pins.forEach((p, i) => {
-      if (!p) return;
-      p.hidden = hiddenCell(i);
-      p.classList.toggle("active", T.idx === i);
-      p.classList.toggle("dim", T.idx >= 0 && T.idx !== i);
-    });
-    if (T.key !== "over") return;
-    // each label takes the first free spot around its pin: right, left, above, below
+    backdrop.classList.toggle("has-route", T.key === "open");
+    for (const p of PINS) {
+      p.el.hidden = hiddenCell(p.ci);
+      p.el.classList.toggle("active", T.idx === p.ci);
+      p.el.classList.toggle("dim", T.idx >= 0 && T.idx !== p.ci);
+    }
+    if (T.key !== "over" || !GLOBE) return;
+    // each label takes the first free spot around its pin: right, left, above, below. A turning globe keeps them
+    // all on the right, since what is free changes as it turns.
     const vw = root.clientWidth;
-    const at = (i) => [(PTS[i][0] - T.mx) * T.s + T.ax, (PTS[i][1] - T.my) * T.s + T.ay];
-    const dots = T.vis.map((i) => {
-      const [x, y] = at(i);
-      return [x - 8, y - 7, x + 8, y + 7, i];
+    const at = (k) => GLOBE.project(T, PINS[k].s.lat, PINS[k].s.lng);
+    const dots = T.vis.map((k) => {
+      const [x, y] = at(k);
+      return [x - 8, y - 7, x + 8, y + 7, k];
     });
+    const named = T.vis.filter((k) => !PINS[k].el.classList.contains("minor"));
     const placed = [];
     const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
-    [...T.vis]
+    [...named]
       .sort((a, b) => at(b)[0] - at(a)[0])
-      .forEach((i) => {
-        const [x, y] = at(i);
-        const w = (pins[i].lastElementChild.offsetWidth || COLS[i].pin.length * 7) + 4;
+      .forEach((k) => {
+        const [x, y] = at(k);
+        const el = PINS[k].el;
+        const w = (el.lastElementChild.offsetWidth || PINS[k].s.label.length * 7) + 4;
         const spots = {
           right: [x + 13, y - 7, x + 17 + w, y + 7],
           left: [x - 17 - w, y - 7, x - 13, y + 7],
           above: [x - w / 2, y - 29, x + w / 2, y - 12],
           below: [x - w / 2, y + 12, x + w / 2, y + 29],
         };
-        const free = (b) => b[0] > 4 && b[2] < vw - 4 && !placed.some((p) => hit(b, p)) && !dots.some((d) => d[4] !== i && hit(b, d));
-        const side = Object.keys(spots).find((k) => free(spots[k])) || "right";
+        const free = (b) => b[0] > 4 && b[2] < vw - 4 && !placed.some((p) => hit(b, p)) && !dots.some((d) => d[4] !== k && hit(b, d));
+        const side = T.spin ? "right" : Object.keys(spots).find((n) => free(spots[n])) || "right";
         placed.push(spots[side]);
-        for (const k of ["left", "above", "below"]) pins[i].classList.toggle(k, k === side);
+        for (const n of ["left", "above", "below"]) el.classList.toggle(n, n === side);
       });
   }
-  function frame() {
+  function frame(now) {
     raf = 0;
     const vh = innerHeight;
     let moving = false;
@@ -651,35 +756,59 @@
     scrollDirty = false;
     const T = target || (target = computeTarget());
     applyMode(T);
-    const ls = Math.log(T.s);
-    // a frame drawn while the window had no size must not leave the camera at a scale it cannot ease back from
-    if (!Number.isFinite(cam.ls + cam.mx + cam.my + cam.ax + cam.ay)) cam.ready = false;
-    if (!cam.ready || REDUCED) {
-      Object.assign(cam, { ls, mx: T.mx, my: T.my, ax: T.ax, ay: T.ay, ready: true });
-    } else {
-      // the map point eases slowly (the flight); the screen anchor follows quickly (scrolling)
-      const k = 0.075;
-      const ka = 0.24;
-      cam.ls += (ls - cam.ls) * k;
-      cam.mx += (T.mx - cam.mx) * k;
-      cam.my += (T.my - cam.my) * k;
-      cam.ax += (T.ax - cam.ax) * ka;
-      cam.ay += (T.ay - cam.ay) * ka;
+    const dt = Math.min(Math.max(now - lastFrame, 0), 100);
+    lastFrame = now;
+    if (GLOBE && GLOBE.has()) {
+      if (T.spin) {
+        spinLam = wrap(spinLam + dt * 0.0045); // a turn in about eighty seconds
+        T.lam = spinLam;
+        moving = true;
+      }
+      const lr = Math.log(T.R);
+      // a frame drawn while the window had no size must not leave the view somewhere it cannot ease back from
+      if (!Number.isFinite(cam.lam + cam.phi + cam.lr + cam.cx + cam.cy + lr)) cam.ready = false;
+      if (!cam.ready || REDUCED) {
+        Object.assign(cam, { lam: T.lam, phi: T.phi, lr, cx: T.cx, cy: T.cy, ready: true });
+      } else {
+        /*
+         * Easing. What is eased is the disc's size, the place facing the viewer, and where on screen the disc's
+         * centre is. When the disc is far larger than the window (a close view at a slant puts its centre far
+         * below the window), its centre has to move in step with its size, or the place being flown to would
+         * swing across the screen on the way: so the centre is eased as a multiple of the radius.
+         */
+        const k = dragAt ? 0.5 : 0.075;
+        const R0 = Math.exp(cam.lr);
+        const ox = (cam.cx - root.clientWidth / 2) / R0;
+        const oy = (cam.cy - vh / 2) / R0;
+        const tx = (T.cx - root.clientWidth / 2) / T.R;
+        const ty = (T.cy - vh / 2) / T.R;
+        cam.lam = wrap(cam.lam + wrap(T.lam - cam.lam) * k);
+        cam.phi += (T.phi - cam.phi) * k;
+        cam.lr += (lr - cam.lr) * k;
+        const R1 = Math.exp(cam.lr);
+        const far = Math.max(R0, T.R) > 2.5 * Math.max(root.clientWidth, vh);
+        if (far) {
+          cam.cx = root.clientWidth / 2 + (ox + (tx - ox) * k) * R1;
+          cam.cy = vh / 2 + (oy + (ty - oy) * k) * R1;
+        } else {
+          // the globe turns slowly (the flight); the disc follows the page quickly (scrolling)
+          cam.cx += (T.cx - cam.cx) * 0.22;
+          cam.cy += (T.cy - cam.cy) * 0.22;
+        }
+      }
+      const view = { lam: cam.lam, phi: cam.phi, R: Math.exp(cam.lr), cx: cam.cx, cy: cam.cy };
+      const route = openIdx >= 0 ? ROUTES[openIdx] : null;
+      GLOBE.draw(view, { route, pos: photoPos, born: openedAt, hop, still: REDUCED }, now);
+      for (const p of PINS) {
+        const at = GLOBE.project(view, p.s.lat, p.s.lng);
+        p.el.style.transform = `translate3d(${at[0].toFixed(1)}px,${at[1].toFixed(1)}px,0)`;
+        p.el.classList.toggle("far", !at[2]);
+      }
+      const turn = (Math.abs(wrap(T.lam - cam.lam)) + Math.abs(T.phi - cam.phi)) * RAD * view.R;
+      if (turn > 0.3 || Math.abs(lr - cam.lr) > 0.002 || Math.abs(T.cx - cam.cx) + Math.abs(T.cy - cam.cy) > 0.4) moving = true;
+      // the marker on the current stop keeps beating; the legs are still drawing themselves in
+      if (route && !REDUCED) moving = true;
     }
-    const s = Math.exp(cam.ls);
-    bdMap.style.transform = `translate3d(${(cam.ax - cam.mx * s).toFixed(2)}px,${(cam.ay - cam.my * s).toFixed(2)}px,0) scale(${(s / K0).toFixed(
-      5
-    )})`;
-    pins.forEach((p, i) => {
-      if (p)
-        p.style.transform = `translate3d(${((PTS[i][0] - cam.mx) * s + cam.ax).toFixed(1)}px,${((PTS[i][1] - cam.my) * s + cam.ay).toFixed(1)}px,0)`;
-    });
-    if (
-      Math.abs(ls - cam.ls) > 0.002 ||
-      (Math.abs(T.mx - cam.mx) + Math.abs(T.my - cam.my)) * s > 0.4 ||
-      Math.abs(T.ax - cam.ax) + Math.abs(T.ay - cam.ay) > 0.4
-    )
-      moving = true;
     if (moving) kick();
   }
   function kick() {
@@ -690,15 +819,76 @@
     scrollDirty = true;
     kick();
   };
+  // the views say which photograph is being looked at; the globe marks, or goes to, where it was taken
+  function photoAt(ci, fi) {
+    if (ci !== openIdx || !ROUTES[ci]) return;
+    const r = ROUTES[ci];
+    const p = fi < 0 ? -1 : r.pos[fi];
+    if (p === photoPos) return;
+    hop =
+      !r.loose && p >= 0 && photoPos >= 0 && Math.abs(p - photoPos) === 1
+        ? { leg: Math.min(p, photoPos), dir: p > photoPos ? 1 : -1, t0: performance.now() }
+        : null;
+    photoPos = p;
+    moved();
+  }
+  // the globe in the hero turns with the pointer or a finger. Nothing in the page sits over it there, so the
+  // events arrive at the document.
+  let dragAt = null;
+  addEventListener("pointerdown", (e) => {
+    if (!GLOBE || openIdx >= 0 || e.button > 0 || backdrop.dataset.mode !== "over") return;
+    if (e.target !== root && e.target !== document.body && e.target !== $(".page")) return;
+    const R = Math.exp(cam.lr);
+    if (Math.hypot(e.clientX - cam.cx, e.clientY - cam.cy) > R) return;
+    dragAt = { x: e.clientX, y: e.clientY, lam: cam.lam, phi: cam.phi, id: e.pointerId, on: false, touch: e.pointerType === "touch" };
+  });
+  addEventListener("pointermove", (e) => {
+    if (!dragAt || e.pointerId !== dragAt.id) return;
+    const dx = e.clientX - dragAt.x;
+    const dy = e.clientY - dragAt.y;
+    if (!dragAt.on) {
+      // a finger moving mostly up or down is scrolling the page
+      if (Math.hypot(dx, dy) < 6) return;
+      if (dragAt.touch && Math.abs(dy) > Math.abs(dx)) {
+        dragAt = null;
+        return;
+      }
+      dragAt.on = true;
+      root.classList.add("globe-drag");
+    }
+    const R = Math.exp(cam.lr);
+    spinLam = wrap(dragAt.lam - dx / R / RAD);
+    handPhi = clamp(dragAt.phi + dy / R / RAD, -70, 70);
+    holdUntil = Infinity;
+    moved();
+  });
+  const dropGlobe = () => {
+    if (!dragAt) return;
+    if (dragAt.on) holdUntil = performance.now() + 4000;
+    root.classList.remove("globe-drag");
+    dragAt = null;
+    moved();
+    setTimeout(moved, 4050);
+  };
+  addEventListener("pointerup", dropGlobe);
+  addEventListener("pointercancel", dropGlobe);
   addEventListener("scroll", moved, { passive: true });
   addEventListener("resize", () => {
     modeKey = "";
+    if (GLOBE) GLOBE.resize();
     setPad();
     fitGrid();
     moved();
   });
+  if (GLOBE) {
+    GLOBE.onChange(() => {
+      modeKey = "";
+      moved();
+    });
+  }
   themeWatchers.push((theme) => {
-    drawWorld();
+    if (GLOBE) GLOBE.setTheme();
+    kick();
     if (glGrid) glGrid.setTheme(theme);
     if (active && active.setTheme) active.setTheme(theme);
   });
@@ -753,7 +943,7 @@
     }
     COLS.forEach((c, i) => {
       const n = c.photos.length;
-      const mini = (c.kind === "roll" ? miniRoll : c.kind === "album" ? miniAlbum : miniPrints)(c);
+      const mini = c.subject ? SUBJ.mini(c, subjectApi) : (c.kind === "roll" ? miniRoll : c.kind === "album" ? miniAlbum : miniPrints)(c);
       const tiltEl = h("div", { class: "tilt" }, mini.el);
       const stage = h(
         "div",
@@ -763,7 +953,7 @@
       const hit = h("button", {
         class: "cell-hit",
         type: "button",
-        "aria-label": `Open ${dotted(c.title + ": " + KIND[c.kind], `${n} photographs`, c.place, c.date)}`,
+        "aria-label": `Open ${dotted(c.title + ": " + LABEL[c.kind], `${n} photographs`, c.place, c.date)}`,
       });
       const cell = h(
         "article",
@@ -772,7 +962,7 @@
         h(
           "div",
           { class: "cell-text" },
-          h("p", { class: "kicker", text: `${KIND[c.kind]} · ${n}` }),
+          h("p", { class: "kicker", text: `${LABEL[c.kind]} · ${n}` }),
           h("h3", { text: c.title }),
           h("p", { class: "cell-meta", text: dotted(c.place, c.date) })
         ),
@@ -785,11 +975,18 @@
         ["focusin", true],
         ["focusout", false],
       ])
-        cell.addEventListener(ev, () => pins[i] && pins[i].classList.toggle("hot", on));
+        cell.addEventListener(ev, () => {
+          for (const p of PINS) if (p.ci === i) p.el.classList.toggle("hot", on);
+          if (on) hotIdx = i;
+          else if (hotIdx === i) hotIdx = -1;
+          moved();
+        });
       const tilt = addTilt(tiltEl, cell, { ax: 10, ay: 8, sx: -3, sy: 6 });
+      // the page opens on the journeys; the subjects wait behind their tab
+      cell.hidden = !!c.subject && JOURNEYS > 0;
       cells.push(cell);
       grid.append(cell);
-      if (!glGrid) return;
+      if (!glGrid || c.subject) return;
       // the WebGL object takes over the cell once its first photograph is in; until then the CSS one shows
       try {
         glGrid.add({
@@ -814,39 +1011,52 @@
     if (c && c.clientWidth) grid.style.setProperty("--k", (c.clientWidth / 400).toFixed(4));
   }
   function buildChrome() {
-    const years = COLS.map((c) => +(String(c.date).match(/\d{4}/) || [])[0]).filter(Boolean);
+    const journeys = COLS.slice(0, JOURNEYS);
+    const years = journeys.map((c) => +(String(c.date).match(/\d{4}/) || [])[0]).filter(Boolean);
     $("#stats").textContent = dotted(
-      count(COLS.length, "collection"),
-      COLS.length
+      count(JOURNEYS, "journey"),
+      JOURNEYS
         ? count(
-            COLS.reduce((a, c) => a + c.photos.length, 0),
+            journeys.reduce((a, c) => a + c.photos.length, 0),
             "photograph"
           )
         : "",
       years.length ? (Math.min(...years) === Math.max(...years) ? String(years[0]) : `${Math.min(...years)}–${Math.max(...years)}`) : ""
     );
     $("#empty").hidden = COLS.length > 0;
-    $("#map-hint").hidden = !pins.some(Boolean);
-    const regions = [...new Set(COLS.map((c) => c.region).filter(Boolean))];
-    if (regions.length < 2) {
+    $("#map-hint").hidden = !PINS.length;
+    // Two ways through the photographs, never mixed: the journeys they were taken on, or the four subjects.
+    const tabs = [
+      ["Journeys", (c) => !c.subject],
+      ["Subjects", (c) => !!c.subject],
+    ].filter(([, is]) => COLS.some(is));
+    if (tabs.length < 2) {
       chipsEl.hidden = true;
       return;
     }
-    const chip = (label, value, n) =>
-      h(
-        "button",
-        { class: "chip", type: "button", "data-region": value, "aria-pressed": String(value === "") },
-        label,
-        h("span", { class: "chip-n", text: String(n) })
-      );
-    chipsEl.append(chip("All", "", COLS.length), ...regions.map((g) => chip(g, g, COLS.filter((c) => c.region === g).length)));
+    const row = h(
+      "div",
+      { class: "chips-row" },
+      tabs.map(([label, is], k) =>
+        h(
+          "button",
+          { class: "chip", type: "button", "aria-pressed": String(k === 0) },
+          label,
+          h("span", { class: "chip-n", text: String(COLS.filter(is).length) })
+        )
+      )
+    );
+    chipsEl.append(row);
     chipsEl.addEventListener("click", (e) => {
       const b = e.target.closest(".chip");
       if (!b) return;
-      for (const other of chipsEl.children) other.setAttribute("aria-pressed", String(other === b));
+      const is = tabs[[...row.children].indexOf(b)][1];
+      for (const other of row.children) other.setAttribute("aria-pressed", String(other === b));
       COLS.forEach((c, i) => {
-        cells[i].hidden = b.dataset.region !== "" && c.region !== b.dataset.region;
+        cells[i].hidden = !is(c);
       });
+      // the four subjects sit side by side where there is room
+      grid.classList.toggle("four", COLS.filter(is).length === 4 && COLS.filter(is).every((c) => c.subject));
       modeKey = "";
       fitGrid();
       moved();
@@ -860,6 +1070,8 @@
   }
 
   /* ---------- an opened collection ---------- */
+  // what the subject views (photography-subjects.js) borrow from this script; filled in below, used only later
+  const subjectApi = { h, pic, dotted, count, fmtCoords, REDUCED };
   const viewer = $("#viewer");
   const vBody = $("#v-body");
   let vTilts = [];
@@ -868,7 +1080,7 @@
     h(
       "div",
       { class: "v-text" },
-      h("p", { class: "kicker", text: dotted(KIND[c.kind], c.coords && fmtCoords(c.coords)) }),
+      h("p", { class: "kicker", text: dotted(LABEL[c.kind], c.coords && fmtCoords(c.coords)) }),
       h("h2", { id: "v-title", text: c.title }),
       h(
         "p",
@@ -880,6 +1092,7 @@
       c.note && h("p", { class: "note", text: c.note })
     );
   const vTilt = (el, zone, o) => vTilts.push(addTilt(el, zone, o));
+  Object.assign(subjectApi, { btn, textBlock, vTilt, photoAt: (ci, fi) => photoAt(ci, fi), openFull: (ci, fi) => openFull(ci, fi) });
   const cssPx = (el, name) => parseFloat(getComputedStyle(el).getPropertyValue(name)) || 0;
   /*
    * Each view returns { el, anchor, focus(), mount(), ready(), setTheme, refresh, destroy }.
@@ -928,18 +1141,23 @@
     );
     let glCan = null; // the WebGL canister, when there is one; the film itself always stays in the page
     const startPad = () => parseFloat(getComputedStyle(strip).scrollPaddingLeft) || 0;
+    // the stylesheet leaves room beyond frame 1 so that it rests just out of the canister; it needs the frame's width
+    const lead = () => film.style.setProperty("--w1", frames[0].offsetWidth + "px");
+    if ("ResizeObserver" in window) new ResizeObserver(lead).observe(frames[0]);
     let raf2 = 0;
     function update() {
       raf2 = 0;
       // the strip runs past the right edge of the screen, so only part of its width counts as visible
       const L = strip.scrollLeft + startPad() - 24;
       const R = strip.scrollLeft + strip.clientWidth - stage.clientWidth * 0.24;
+      // frames are measured from the film's left end, which lies this far to the left of where scrolling starts
+      const base = strip.clientWidth - strip.scrollWidth;
       let a = -1;
       let b = -1;
       let best = 0;
       let bestV = -1;
       frames.forEach((f, i) => {
-        const l = f.offsetLeft;
+        const l = f.offsetLeft + base;
         const w = f.offsetWidth;
         const v = Math.min(l + w, R) - Math.max(l, L);
         if (v > bestV) {
@@ -953,9 +1171,12 @@
       });
       if (a < 0) a = b = best;
       out.textContent = a === b ? String(a + 1) : `${a + 1}–${b + 1}`;
-      back.disabled = strip.scrollLeft <= 1;
-      fwd.disabled = strip.scrollLeft >= strip.scrollWidth - strip.clientWidth - 1;
-      // pulling film turns the spool
+      photoAt(ci, Math.round((a + b) / 2));
+      // The strip is laid out from right to left: at rest frame 1 is just out of the canister, and going on draws
+      // the film out to the right, the next frame following it out. Its scroll position runs from 0 down.
+      back.disabled = strip.scrollLeft >= -1;
+      fwd.disabled = strip.scrollLeft <= strip.clientWidth - strip.scrollWidth + 1;
+      // film drawn out turns the spool the way the film goes
       const spin = -strip.scrollLeft * 0.45;
       can.body.style.setProperty("--spin", spin.toFixed(1) + "px");
       if (glCan) glCan.spin(spin);
@@ -971,7 +1192,7 @@
       [back, -1],
       [fwd, 1],
     ])
-      b.addEventListener("click", () => strip.scrollBy({ left: d * Math.max(220, stage.clientWidth * 0.55), behavior: SMOOTH }));
+      b.addEventListener("click", () => strip.scrollBy({ left: -d * Math.max(220, stage.clientWidth * 0.55), behavior: SMOOTH }));
     strip.addEventListener("keydown", (e) => {
       const i = frames.indexOf(document.activeElement);
       if (i < 0) return;
@@ -991,7 +1212,7 @@
       frames[i].tabIndex = -1;
       frames[j].tabIndex = 0;
       frames[j].focus({ preventScroll: true });
-      strip.scrollTo({ left: frames[j].offsetLeft - startPad(), behavior: SMOOTH });
+      strip.scrollTo({ left: frames[j].offsetLeft + strip.clientWidth - strip.scrollWidth - startPad(), behavior: SMOOTH });
     });
     // drag the film with a mouse; touch and trackpads scroll it natively
     let down = null;
@@ -1050,7 +1271,10 @@
           glCan = null;
         }
       },
-      ready: update,
+      ready() {
+        lead();
+        update();
+      },
       setTheme: (t) => glCan && glCan.setTheme(t),
       refresh: () => glCan && glCan.refresh(),
       destroy: () => glCan && glCan.destroy(),
@@ -1084,6 +1308,7 @@
       book.set(open, pos);
       counter.textContent = open ? `${pos + 1} / ${n}` : count(n, "page");
       cap.textContent = open ? c.photos[pos].caption : "";
+      photoAt(ci, open ? pos : -1);
       bOpen.textContent = open ? "Close album" : "Open album";
       bPrev.disabled = !open || pos === 0;
       bNext.disabled = open && pos === n - 1;
@@ -1240,6 +1465,7 @@
     const onChange = (top, wanted) => {
       counter.textContent = `${top + 1} / ${n}`;
       cap.textContent = c.photos[top].caption;
+      photoAt(ci, top);
       wanted.forEach((j) => j != null && imgs[j].load());
     };
     bPrev.addEventListener("click", () => pileView.deal(-1));
@@ -1418,11 +1644,15 @@
   function openCollection(i) {
     const c = COLS[i];
     closeView();
-    const v = (c.kind === "roll" ? viewRoll : c.kind === "album" ? viewAlbum : viewPrints)(c, i);
+    const v = c.subject ? SUBJ.view(c, i, subjectApi) : (c.kind === "roll" ? viewRoll : c.kind === "album" ? viewAlbum : viewPrints)(c, i);
     vBody.replaceChildren(v.el);
     openIdx = i;
     vAnchor = v.anchor;
     active = v;
+    openedAt = performance.now();
+    photoPos = -1;
+    hop = null;
+    viewer.classList.toggle("has-route", !!ROUTES[i]);
     root.classList.add("v-open");
     if (glGrid) glGrid.pause(true);
     if (!viewer.open) viewer.showModal();
@@ -1446,6 +1676,8 @@
     root.classList.remove("v-open");
     openIdx = -1;
     vAnchor = null;
+    photoPos = -1;
+    hop = null;
     closeView();
     vBody.replaceChildren();
     if (glGrid) glGrid.pause(false);
@@ -1490,8 +1722,9 @@
     big.src = p.full;
     $("#lb-roll").textContent = c.title;
     $("#lb-pos").textContent = `${cur.fi + 1} / ${n}`;
+    photoAt(cur.ci, cur.fi);
     $("#lb-cap").textContent = p.caption;
-    $("#lb-place").textContent = dotted(c.place, c.date);
+    $("#lb-place").textContent = c.subject ? dotted(p.place, p.from, p.when) : dotted(p.place || c.place, c.date);
     lbUrl.value = new URL(p.full, location.href).href;
     $("#lb-open").href = p.full;
     $("#lb-prev").disabled = cur.fi === 0;

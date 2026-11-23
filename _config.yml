@@ -421,6 +421,18 @@ third_party_libraries:
     url:
       js: "https://cdn.jsdelivr.net/npm/d3@{{version}}/dist/d3.min.js"
     version: "7.8.5"
+  d3-array: # needed by d3-geo
+    integrity:
+      js: "sha256-gKpw0M0X2r3fbQVklOoXkmpFpp2ot4UCIKrOMxutZx0="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/d3-array@{{version}}/dist/d3-array.min.js"
+    version: "3.2.4"
+  d3-geo: # draws the globe on the photography page
+    integrity:
+      js: "sha256-I+V08ejUcW1iK85FNWo3m2aidxYrFF9fFH5Mja77c9I="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/d3-geo@{{version}}/dist/d3-geo.min.js"
+    version: "3.1.1"
   diff2html:
     integrity:
       css: "sha256-IMBK4VNZp0ivwefSn51bswdsrhk0HoMTLc2GqFHFBXg="
@@ -474,12 +486,6 @@ third_party_libraries:
     url:
       js: "https://cdn.jsdelivr.net/npm/jquery@{{version}}/dist/jquery.min.js"
     version: "3.6.0"
-  jsvectormap-world: # world outline used by the map on the photography page
-    integrity:
-      js: "sha256-XPpPaZlU8S/HWf7FZLAncLg2SAkP8ScUTII89x9D3lY="
-    url:
-      js: "https://cdn.jsdelivr.net/npm/jsvectormap@{{version}}/dist/maps/world.js"
-    version: "1.5.3"
   leaflet:
     integrity:
       css: "sha256-q9ba7o845pMPFU+zcAll8rv+gC+fSovKsOoNQ6cynuQ="
@@ -594,6 +600,17 @@ third_party_libraries:
     url:
       js: "https://cdn.jsdelivr.net/npm/swiper@11.1.0/swiper-element-bundle.min.js.map"
     version: "11.0.5"
+  topojson-client: # unpacks the world outlines for the globe on the photography page
+    integrity:
+      js: "sha256-Jc0CrkhsxQY+AhWk5M+xXeg3AMh6xIusTVfcaq8+u4k="
+    url:
+      js: "https://cdn.jsdelivr.net/npm/topojson-client@{{version}}/dist/topojson-client.min.js"
+    version: "3.1.0"
+  world-atlas: # country outlines for the globe on the photography page (data, fetched by its script)
+    url:
+      coarse: "https://cdn.jsdelivr.net/npm/world-atlas@{{version}}/countries-110m.json"
+      detail: "https://cdn.jsdelivr.net/npm/world-atlas@{{version}}/countries-50m.json"
+    version: "2.0.2"
   three: # WebGL renderer for the objects on the photography page
     integrity:
       js: "sha256-knS7zsjZYWhibHMrXTHHdaqM+36qBZm+wMF1kIosHOI="
