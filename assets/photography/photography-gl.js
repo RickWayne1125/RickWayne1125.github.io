@@ -8,6 +8,7 @@
  *
  * Units are CSS pixels. CSS axes are x right, y down; three.js has y up, so y, rotateX and rotateZ change sign.
  * Photographs are drawn from the <img> elements photography.js already loaded, which therefore must be CORS-clean.
+ * Photographs keep the colours of their files: every surface that shows one is drawn unlit (see photoMaterial).
  */
 (() => {
   "use strict";
@@ -47,6 +48,46 @@
     t.anisotropy = 8;
     t.needsUpdate = true;
     return t;
+  }
+  /*
+   * A surface that shows a photograph. Lit materials change its colours: the lights and the reflected studio lift the
+   * blacks, grey the whites and tint everything a little blue, more so as the surface turns. This one is unlit, so with
+   * an sRGB map and sRGB output every pixel comes out as it is in the file. `bend` brings back some of the shape lighting
+   * gave, without touching colour where it matters: it darkens the surface only where it has turned away from lying flat
+   * in its own plane, as a leaf does while it is being turned, and never at rest.
+   */
+  function photoMaterial(map, { bend = 0, side = THREE.FrontSide } = {}) {
+    const m = new THREE.MeshBasicMaterial({ map, side });
+    if (bend)
+      m.onBeforeCompile = (sh) => {
+        sh.uniforms.uBend = { value: bend };
+        sh.vertexShader =
+          "varying float vFlat;\n" +
+          sh.vertexShader.replace("#include <begin_vertex>", "#include <begin_vertex>\n\tvFlat = abs( normalize( normal ).z );");
+        sh.fragmentShader =
+          "uniform float uBend;\nvarying float vFlat;\n" +
+          sh.fragmentShader.replace("#include <map_fragment>", "#include <map_fragment>\n\tdiffuseColor.rgb *= 1.0 - uBend * ( 1.0 - vFlat );");
+      };
+    return m;
+  }
+  // Shadows that fall on an unlit photograph: a transparent copy of its surface that draws nothing but the shadow.
+  const CATCH = { light: 0.38, dark: 0.5 };
+  function shadowCatcher(geometry, theme) {
+    const m = new THREE.Mesh(
+      geometry,
+      new THREE.ShadowMaterial({
+        opacity: CATCH[theme] || CATCH.light,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -1,
+        polygonOffsetUnits: -4,
+      })
+    );
+    m.receiveShadow = true;
+    m.userData.catcher = true;
+    m.userData.noCast = true;
+    return m;
   }
   const loaded = (img) => !!img && img.complete && img.naturalWidth > 0;
   // run fn now if the image is in, and again whenever it loads
@@ -329,6 +370,7 @@
       y += tSize * 1.05;
     }
     y += gap;
+    const plate = { x: cx - plateW / 2, y, w: plateW, h: plateH };
     if (rm) {
       x.fillStyle = "rgb(0,110,0)";
       x.fillRect(cx - plateW / 2, y, plateW, plateH);
@@ -339,6 +381,7 @@
     }
     y += plateH + gap;
     small(c.date);
+    return plate;
   }
   function paperBase(x, w, h, L, spineLeft) {
     x.fillStyle = L.paper;
@@ -552,13 +595,28 @@
     const cloth = clothMaterial(c.look.cover, env);
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, 2.4), [cloth, cloth, cloth, cloth, front, end]);
     mesh.position.set(w / 2, 0, 0);
+    // the photograph on the cover, unlit so it keeps its colours, a hair in front of the cloth
+    const plateCv = makeCanvas(2, 2);
+    const plate = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), photoMaterial(texture(plateCv)));
+    plate.visible = false;
+    plate.userData.noCast = true;
+    mesh.add(plate);
     const pivot = new THREE.Group();
     pivot.position.z = 1.4;
     pivot.add(mesh);
     const paint = () => {
-      drawCover(colour, S, w, h, pw, c, img, "color");
+      const r = drawCover(colour, S, w, h, pw, c, img, "color");
       drawCover(rm, S, w, h, pw, c, img, "rm");
       drawEndpaper(inside, S, w, h, pw, c);
+      if (loaded(img)) {
+        plateCv.width = Math.round(r.w * S);
+        plateCv.height = Math.round(r.h * S);
+        cover(plateCv.getContext("2d"), img, 0, 0, plateCv.width, plateCv.height);
+        plate.scale.set(r.w, r.h, 1);
+        plate.position.set(r.x + r.w / 2 - w / 2, h / 2 - r.y - r.h / 2, 1.26);
+        plate.visible = true;
+        plate.material.map.needsUpdate = true;
+      }
       map.needsUpdate = rmap.needsUpdate = end.map.needsUpdate = true;
       if (onChange) onChange();
     };
@@ -568,15 +626,19 @@
     pivot.repaint = paint;
     return pivot;
   }
-  function printMesh(c, img, prw, env) {
+  function printMesh(c, img, prw, env, theme) {
     const g = new THREE.Group();
     const paper = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1),
       new THREE.MeshStandardMaterial({ color: lin(c.look.border), roughness: 0.62, envMap: env, envMapIntensity: 0.25 })
     );
-    const photoMat = new THREE.MeshStandardMaterial({ color: lin("#d9d6cf"), roughness: 0.5, envMap: env, envMapIntensity: 0.35 });
+    const photoMat = photoMaterial(null);
+    photoMat.color = lin("#d9d6cf"); // until the photograph is in
     const photo = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), photoMat);
+    photo.userData.noCast = true; // the paper under it casts the same shadow
     g.add(paper, photo);
+    const catcher = theme ? shadowCatcher(photo.geometry, theme) : null;
+    if (catcher) g.add(catcher);
     g.paper = paper;
     // the long edge of every print is prw, like the CSS version
     g.shape = (ratio) => {
@@ -586,6 +648,10 @@
       paper.scale.set(w + b * 2, h + b * 2, 0.9);
       photo.scale.set(w, h, 1);
       photo.position.z = 0.5;
+      if (catcher) {
+        catcher.scale.copy(photo.scale);
+        catcher.position.copy(photo.position);
+      }
       g.w = w + b * 2;
     };
     g.fill = () => {
@@ -663,7 +729,7 @@
     const d = { pw: 228, ph: 288, bd: 22 };
     const S = 2.2;
     const pageCv = makeCanvas(d.pw * S, d.ph * S);
-    const pageMat = new THREE.MeshStandardMaterial({ map: texture(pageCv), roughness: 0.88 });
+    const pageMat = photoMaterial(texture(pageCv));
     const pose = new THREE.Group();
     pose.rotation.set(-15 * DEG, -27 * DEG, 3 * DEG);
     const book = new THREE.Group();
@@ -976,6 +1042,9 @@
       setTheme(next) {
         lights.setTheme(next);
         desk.material.opacity = next === "light" ? 0.2 : 0.42;
+        scene.traverse((o) => {
+          if (o.userData.catcher) o.material.opacity = CATCH[next] || CATCH.light;
+        });
         kick();
       },
       destroy() {
@@ -1024,13 +1093,12 @@
       const geo = new THREE.PlaneGeometry(d.pw, d.ph, SEG, 1);
       const fcv = makeCanvas(d.pw * S, d.ph * S);
       const bcv = makeCanvas(d.pw * S, d.ph * S);
-      const front = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: texture(fcv), roughness: 0.88, side: THREE.FrontSide }));
+      const front = new THREE.Mesh(geo, photoMaterial(texture(fcv), { bend: 0.42 }));
       const backMap = texture(bcv);
       backMap.wrapS = THREE.RepeatWrapping;
       backMap.repeat.x = -1; // read from behind
-      const back = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ map: backMap, roughness: 0.88, side: THREE.BackSide }));
-      front.receiveShadow = back.receiveShadow = true;
-      book.add(front, back);
+      const back = new THREE.Mesh(geo, photoMaterial(backMap, { bend: 0.42, side: THREE.BackSide }));
+      book.add(front, back, shadowCatcher(geo, theme));
       const mr = (((fi * 7919) % 26) - 13) / 10; // a slight, fixed tilt per mount
       const leaf = { fi, geo, front, back, f: 0, from: 0, to: 0, start: 0, dur: 1, drawn: false };
       const paint = () => {
@@ -1216,10 +1284,13 @@
       return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
     };
     const cards = imgs.map((img, i) => {
-      const g = printMesh(c, img, size, env);
+      const g = printMesh(c, img, size, env, theme);
       g.shape(c.photos[i].ratio || 1.5);
       g.traverse((o) => {
-        if (o.isMesh) o.castShadow = o.receiveShadow = true;
+        if (o.isMesh) {
+          o.castShadow = !o.userData.noCast;
+          o.receiveShadow = true;
+        }
       });
       g.rotation.order = "ZYX";
       g.rot = i ? (rnd() - 0.5) * 13 : -2;
