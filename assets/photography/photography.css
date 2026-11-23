@@ -1311,10 +1311,18 @@ button.frame:hover {
 .can.gl-on .can-3d {
   visibility: hidden;
 }
-.gl-view {
-  outline-offset: -6px;
+/* the WebGL canvas reaches well past the object it draws, so its focus ring goes around the stage instead */
+.gl-view:focus {
+  outline: none;
 }
-.gl-view:focus:not(:focus-visible) {
+.stage:has(.gl-view:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 14px;
+}
+/* opened with a pointer: the object has focus for the arrow keys, but shows no ring until a key is used */
+.by-pointer #viewer :focus-visible,
+.by-pointer #viewer .stage:has(.gl-view:focus-visible) {
   outline: none;
 }
 

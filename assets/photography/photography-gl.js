@@ -1307,14 +1307,22 @@
     });
     let order = cards.map((_, i) => i); // order[0] is on top
     let fan = false;
+    let step = 22; // how far each print slides out when the pile fans
     let busy = false;
     let drag = null;
+    // fan no further than the window has room for on the right: half a print, its turn and the scatter
+    const fanStep = () => {
+      const b = stage.getBoundingClientRect();
+      return clamp((window.innerWidth - 16 - (b.left + b.width / 2) - size * 0.62 - 14) / 6, 4, 22);
+    };
+    // the photographs worth loading: the top few, the bottom one, and all that show while the pile is fanned
+    const wanted = () => (fan ? order.slice(0, 7) : order.slice(0, 3)).concat(order[n - 1]);
     // where card i rests when it is p-th from the top (CSS coordinates: y down, degrees)
     const rest = (i, p, o = {}) => {
       const g = cards[i];
       const f = fan ? Math.min(p, 6) : 0;
       return {
-        x: g.dx + f * 22 + (o.x || 0),
+        x: g.dx + f * step + (o.x || 0),
         y: g.dy - f * 5 + (o.y || 0),
         z: (n - 1 - p) * 2.6 + (o.z || 0),
         r: g.rot + f * 2.2 + (o.r || 0),
@@ -1378,7 +1386,7 @@
           ? { keys: [g.cur, hi, lo, rest(i, n - 1)], at: [0, 0.36, 0.6, 1], start: performance.now(), dur: 880, ease: inOut, done }
           : { keys: [g.cur, lo, hi, rest(i, 0)], at: [0, 0.36, 0.62, 1], start: performance.now(), dur: 880, ease: inOut, done };
       settle();
-      onChange(order[0], [order[0], order[1], order[2], order[n - 1]]);
+      onChange(order[0], wanted());
     }
     const ray = new THREE.Raycaster();
     const onTop = (e) => {
@@ -1432,13 +1440,15 @@
     stage.addEventListener("pointerenter", (e) => {
       if (e.pointerType !== "mouse") return;
       fan = true;
+      step = fanStep();
+      onChange(order[0], wanted());
       if (!busy && !drag) settle();
     });
     stage.addEventListener("pointerleave", () => {
       fan = false;
       if (!busy && !drag) settle();
     });
-    onChange(order[0], [order[0], order[1], order[2], order[n - 1]]);
+    onChange(order[0], wanted());
     return {
       el: base.canvas,
       deal,
