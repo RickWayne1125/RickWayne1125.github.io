@@ -1,7 +1,9 @@
 /*
  * /photography/ — collections from _data/photography.yml shown as 3D objects on a map.
  *
- * The layout embeds the data as JSON (#ph-data). Each collection becomes a grid cell (a film roll, an album or a pile
+ * The layout embeds the data as JSON (#ph-data). When that data names a `manifest`, the same kind of file is also
+ * fetched from the image host as the page loads, so collections published there appear without rebuilding the site.
+ * Each collection becomes a grid cell (a film roll, an album or a pile
  * of prints) and a pin on the map canvas behind the page. Opening a collection flies the map to its coordinates and
  * shows the full object in a dialog. Browsing uses the `preview` files; the `full` file is only requested when a
  * photograph is opened at full size.
@@ -10,7 +12,7 @@
  * allows cross-origin use of its files, photography-gl.js then draws the same objects as real meshes in their place.
  * Add ?gl=0 to the address to stay with the CSS version.
  */
-(() => {
+(async () => {
   "use strict";
 
   const dataEl = document.getElementById("ph-data");
@@ -21,6 +23,29 @@
   } catch (err) {
     DATA = {};
   }
+  // Collections listed in the manifest on the image host come first; the ones written into the site's own data file
+  // follow. If the manifest cannot be read in time the page carries on with what it has. ?manifest=0 skips it.
+  async function withManifest(data) {
+    const name = data.manifest;
+    if (!name || /[?&]manifest=0\b/.test(location.search) || !window.fetch) return data;
+    const host = String(data.host || "").replace(/\/+$/, "");
+    const url = /^(https?:)?\/\//.test(name) ? name : (host ? host + "/" : "") + String(name).replace(/^\/+/, "");
+    try {
+      const ctl = "AbortController" in window ? new AbortController() : null;
+      const timer = setTimeout(() => ctl && ctl.abort(), 3500);
+      const res = await fetch(url, { cache: "no-cache", signal: ctl ? ctl.signal : undefined });
+      clearTimeout(timer);
+      if (!res.ok) return data;
+      const remote = await res.json();
+      const first = (Array.isArray(remote && remote.collections) ? remote.collections : []).filter((c) => c && c.id);
+      const ids = new Set(first.map((c) => c.id));
+      const own = (Array.isArray(data.collections) ? data.collections : []).filter((c) => c && !ids.has(c.id));
+      return Object.assign({}, data, { collections: first.concat(own) });
+    } catch (err) {
+      return data;
+    }
+  }
+  DATA = await withManifest(DATA);
 
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SMOOTH = REDUCED ? "auto" : "smooth";
@@ -543,7 +568,7 @@
         return {
           key: "over",
           idx: -1,
-          s: Math.min(win.width / MAPW, win.height / 330),
+          s: Math.max(Math.min(win.width / MAPW, win.height / 330), 0.02),
           mx: 450,
           my: 190,
           ax: win.left + win.width / 2,
@@ -568,7 +593,7 @@
       };
     }
     // further down the page: the whole world, dimmed, behind the grid
-    return { key: "wide", idx: -1, s: Math.max(vw / MAPW, vh / MAPH) * 1.04, mx: 450, my: 205, ax: vw / 2, ay: vh / 2 };
+    return { key: "wide", idx: -1, s: Math.max(vw / MAPW, vh / MAPH, 0.02) * 1.04, mx: 450, my: 205, ax: vw / 2, ay: vh / 2 };
   }
   function applyMode(T) {
     const key = T.key + T.idx + (T.vis ? T.vis.join("") : "");
@@ -627,6 +652,8 @@
     const T = target || (target = computeTarget());
     applyMode(T);
     const ls = Math.log(T.s);
+    // a frame drawn while the window had no size must not leave the camera at a scale it cannot ease back from
+    if (!Number.isFinite(cam.ls + cam.mx + cam.my + cam.ax + cam.ay)) cam.ready = false;
     if (!cam.ready || REDUCED) {
       Object.assign(cam, { ls, mx: T.mx, my: T.my, ax: T.ax, ay: T.ay, ready: true });
     } else {

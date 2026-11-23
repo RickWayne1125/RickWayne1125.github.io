@@ -33,4 +33,8 @@
 #   prints: look: { border: "#f2efe8" }
 
 host: https://img.waynetech.site
+# A file on `host` with the same `collections:` list, written by the photography-sync service that publishes folders
+# of photographs. The page reads it as it loads and shows those collections before the ones listed below, so new
+# collections appear without rebuilding this site. Remove the line to use only the list below.
+manifest: collections.json
 collections: []
