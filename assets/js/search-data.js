@@ -30,8 +30,8 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
-        },{id: "nav-photography",
-          title: "photography",
+        },{id: "nav-life",
+          title: "life",
           description: "Photographs kept as collections, each placed on the map where it was shot.",
           section: "Navigation",
           handler: () => {
