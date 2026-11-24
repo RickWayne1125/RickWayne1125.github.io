@@ -9,8 +9,10 @@
  *   animals    a field notebook: the photograph taped to the right page, where and when written on the left
  *
  * window.PhotographySubjects = { mini(c, api), view(c, ci, api) }. `api` is what photography.js lends: h, pic, btn,
- * textBlock, dotted, openFull, photoAt, vTilt, REDUCED. A view returns { el, anchor, focus(), ready() } like the views
- * of the journeys do. Everything here is plain elements and CSS 3D transforms.
+ * textBlock, dotted, openFull, photoAt, vTilt, REDUCED, theme, gl. A view returns { el, anchor, focus(), mount(), ready(),
+ * setTheme, refresh, destroy } like the views of the journeys do. Everything here is plain elements and CSS 3D
+ * transforms; when WebGL is on (api.gl()), photography-subjects-gl.js draws each object as meshes over the same stage and
+ * the CSS one stays underneath, hidden, holding the layout.
  */
 (() => {
   "use strict";
@@ -99,6 +101,41 @@
     img.load();
     return img;
   };
+  /*
+   * The WebGL version of a subject (photography-subjects-gl.js), if WebGL is on. It is laid over the stage and the CSS
+   * object stays underneath, hidden, holding the layout. `make(G, img)` builds it; `img(fi)` loads each photograph once
+   * for it. Returns the view's own mount / focus / setTheme / refresh / destroy.
+   */
+  function glHost(api, c, s, cssFocus, make, go, open) {
+    let g = null;
+    const imgs = [];
+    const img = (fi) => imgs[fi] || (imgs[fi] = photoIn(api, c, fi));
+    return {
+      get: () => g,
+      mount() {
+        const G = api.gl && api.gl();
+        if (!G) return;
+        try {
+          g = make(G, img);
+        } catch (err) {
+          g = null;
+          return;
+        }
+        s.keys(g.el, go, open);
+        s.el.classList.add("gl-on");
+      },
+      focus: () => (g ? g.el : cssFocus).focus({ preventScroll: true }),
+      setTheme: (t) => g && g.setTheme && g.setTheme(t),
+      refresh: () => g && g.refresh && g.refresh(),
+      destroy: () => g && g.destroy && g.destroy(),
+      // the photographs on either side are fetched ahead
+      ahead(i) {
+        if (!g) return;
+        for (const fi of [i - 1, i + 1]) if (fi >= 0 && fi < c.photos.length) img(fi);
+      },
+    };
+  }
+  const glParts = (host) => ({ mount: host.mount, focus: host.focus, setTheme: host.setTheme, refresh: host.refresh, destroy: host.destroy });
 
   /* ---------- food: the table ---------- */
   function viewTable(c, ci, api) {
@@ -142,11 +179,40 @@
     const pose = h("div", { class: "tb-pose" }, top);
     const tilt = h("div", { class: "tilt" }, pose);
     s.stage.append(h("div", { class: "enter" }, tilt));
+    const gl = glHost(
+      api,
+      c,
+      s,
+      top,
+      (G, img) =>
+        G.table({
+          stage: s.stage,
+          c,
+          m,
+          imgFor: img,
+          theme: api.theme(),
+          size: () => top.offsetWidth,
+          onPick: (j) => {
+            const r = (j - front + m) % m;
+            if (!r) api.openFull(ci, cur);
+            else go(r <= m / 2 ? r : r - m);
+          },
+        }),
+      (d) => go(d),
+      () => api.openFull(ci, cur)
+    );
     function paint() {
       susan.style.setProperty("--turn", `${turn}deg`);
       plates.forEach((p, j) => p.classList.toggle("front", j === front));
       s.say(cur);
       api.photoAt(ci, cur);
+      const g = gl.get();
+      if (g)
+        g.paint(
+          turn,
+          front,
+          plates.map((p) => +p.dataset.fi)
+        );
     }
     function go(d) {
       const sgn = Math.sign(d);
@@ -168,7 +234,7 @@
     s.keys(top, go, () => api.openFull(ci, cur));
     s.swipe(go);
     api.vTilt(tilt, s.stage, { ax: 5, ay: 4 });
-    return { el: s.el, anchor: top, focus: () => top.focus({ preventScroll: true }), ready: paint };
+    return Object.assign({ el: s.el, anchor: top, ready: paint }, glParts(gl));
   }
 
   /* ---------- landscape: the viewfinder ---------- */
@@ -203,6 +269,15 @@
     );
     const tilt = h("div", { class: "tilt" }, body);
     s.stage.append(h("div", { class: "enter" }, tilt));
+    const gl = glHost(
+      api,
+      c,
+      s,
+      glass,
+      (G, img) => G.finder({ stage: s.stage, c, imgFor: img, theme: api.theme(), size: () => body.offsetWidth, onFull: () => api.openFull(ci, i) }),
+      (d) => go(d),
+      () => api.openFull(ci, i)
+    );
     function put() {
       pic.replaceChildren(photoIn(api, c, i));
       frameNo.textContent = String(i + 1).padStart(2, "0");
@@ -210,6 +285,8 @@
       needle.style.setProperty("--n", String(((i * 37) % 70) - 35));
       s.say(i);
       api.photoAt(ci, i);
+      if (gl.get()) gl.get().show(i);
+      gl.ahead(i);
     }
     function go(d) {
       const j = i + d;
@@ -217,6 +294,7 @@
       i = j;
       if (api.REDUCED) return put();
       busy = true;
+      if (gl.get()) gl.get().shutter();
       glass.classList.add("shut");
       setTimeout(() => {
         put();
@@ -235,7 +313,7 @@
     s.keys(glass, go, () => api.openFull(ci, i));
     s.swipe(go);
     api.vTilt(tilt, s.stage, { ax: 6, ay: 5 });
-    return { el: s.el, anchor: body, focus: () => glass.focus({ preventScroll: true }), ready: put };
+    return Object.assign({ el: s.el, anchor: body, ready: put }, glParts(gl));
   }
 
   /* ---------- people: the slide projector ---------- */
@@ -260,10 +338,22 @@
     const room = h("div", { class: "pj-room" }, h("div", { class: "pj-screen" }, slide), h("i", { class: "pj-beam" }), box);
     const tilt = h("div", { class: "tilt" }, room);
     s.stage.append(h("div", { class: "enter" }, tilt));
-    function put() {
+    const gl = glHost(
+      api,
+      c,
+      s,
+      slide,
+      (G, img) =>
+        G.projector({ stage: s.stage, c, imgFor: img, theme: api.theme(), size: () => room.offsetWidth, onFull: () => api.openFull(ci, i) }),
+      (d) => go(d),
+      () => api.openFull(ci, i)
+    );
+    function put(animate) {
       pic.replaceChildren(photoIn(api, c, i));
       s.say(i);
       api.photoAt(ci, i);
+      if (gl.get()) gl.get().show(i, animate === true);
+      gl.ahead(i);
     }
     function go(d) {
       const j = i + d;
@@ -273,10 +363,11 @@
       tray.style.setProperty("--turn", `${notch * 9}deg`);
       if (api.REDUCED) return put();
       busy = true;
+      if (gl.get()) gl.get().change(d);
       slide.dataset.dir = d > 0 ? "next" : "prev";
       slide.classList.add("out");
       setTimeout(() => {
-        put();
+        put(true);
         slide.classList.remove("out");
         slide.classList.add("in");
       }, 190);
@@ -292,7 +383,7 @@
     s.keys(slide, go, () => api.openFull(ci, i));
     s.swipe(go);
     api.vTilt(tilt, s.stage, { ax: 5, ay: 4 });
-    return { el: s.el, anchor: room, focus: () => slide.focus({ preventScroll: true }), ready: put };
+    return Object.assign({ el: s.el, anchor: room, ready: put }, glParts(gl));
   }
 
   /* ---------- animals: the field notebook ---------- */
@@ -335,11 +426,42 @@
     const pose = h("div", { class: "nb-pose" }, book, h("i", { class: "nb-pencil" }));
     const tilt = h("div", { class: "tilt" }, pose);
     s.stage.append(h("div", { class: "enter" }, tilt));
+    // the same notes, as text for the WebGL notebook to write on its page
+    const glText = (fi) => {
+      const p = c.photos[fi];
+      return {
+        no: `No. ${String(fi + 1).padStart(2, "0")}`,
+        what: p.caption || p.alt || "",
+        place: p.place || "",
+        line: api.dotted(p.from, p.when),
+        small: p.coords ? api.fmtCoords(p.coords) : "",
+      };
+    };
+    const gl = glHost(
+      api,
+      c,
+      s,
+      right,
+      (G, img) =>
+        G.notebook({
+          stage: s.stage,
+          c,
+          imgFor: img,
+          text: glText,
+          theme: api.theme(),
+          size: () => book.offsetWidth,
+          onFull: () => api.openFull(ci, i),
+        }),
+      (d) => go(d),
+      () => api.openFull(ci, i)
+    );
     const settle = () => {
       left.replaceChildren(...notes(i).filter(Boolean));
       right.replaceChildren(...taped(i));
       s.say(i);
       api.photoAt(ci, i);
+      if (gl.get()) gl.get().pages(i, i);
+      gl.ahead(i);
     };
     function go(d) {
       const j = i + d;
@@ -349,6 +471,14 @@
         return settle();
       }
       busy = true;
+      const g = gl.get();
+      if (g) {
+        // as in the CSS version: the leaf carries the old print away (or brings the new one back), and the page it
+        // uncovers already shows what belongs there
+        g.turn(d, d > 0 ? i : j, d > 0 ? j : i);
+        if (d > 0) g.pages(i, j);
+        else g.pages(j, i);
+      }
       // One leaf turns over the spine. Going on, it carries the old photograph away and brings the new notes; going
       // back, the other way round. The page it uncovers already shows what belongs there.
       front.replaceChildren(...taped(d > 0 ? i : j));
@@ -380,7 +510,7 @@
     s.keys(right, go, () => api.openFull(ci, i));
     s.swipe(go);
     api.vTilt(tilt, s.stage, { ax: 5, ay: 4 });
-    return { el: s.el, anchor: book, focus: () => right.focus({ preventScroll: true }), ready: settle };
+    return Object.assign({ el: s.el, anchor: book, ready: settle }, glParts(gl));
   }
 
   /* ---------- the small objects in the grid ---------- */
