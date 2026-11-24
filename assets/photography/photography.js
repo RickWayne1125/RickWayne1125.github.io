@@ -53,6 +53,17 @@
   const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const SMOOTH = REDUCED ? "auto" : "smooth";
   const root = document.documentElement;
+  // Opening a collection gives its object focus, so the arrow keys work at once. Some browsers (Safari) then draw a
+  // focus ring even when it was opened with the mouse; the ring is kept for when a key was the last thing used.
+  const MODIFIER = /^(Meta|Control|Alt|Shift|CapsLock|Fn|OS)$/;
+  document.addEventListener("pointerdown", () => root.classList.add("by-pointer"), true);
+  document.addEventListener(
+    "keydown",
+    (e) => {
+      if (!MODIFIER.test(e.key) && !e.metaKey && !e.ctrlKey) root.classList.remove("by-pointer");
+    },
+    true
+  );
   const $ = (s, from = document) => from.querySelector(s);
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const pad2 = (n) => String(n).padStart(2, "0");
@@ -1496,13 +1507,19 @@
       stage.append(h("div", { class: "enter" }, h("div", { class: "float" }, h("div", { class: "pose pile-pose" }, tilt))));
       let order = prints.map((_, i) => i); // order[0] is the print on top
       let fan = false;
+      let step = 22; // how far each print slides out when the pile fans
       let busy = false;
       let drag = null;
+      // fan no further than the window has room for on the right: half a print, its turn and the scatter
+      const fanStep = () => {
+        const b = stage.getBoundingClientRect();
+        return clamp((window.innerWidth - 16 - (b.left + b.width / 2) - cssPx(el, "--prw") * 0.62 - 14) / 6, 4, 22);
+      };
       // where print i sits when it is p-th from the top; `o` adds an offset on top of that
       const pose = (i, p, o = {}) => {
         const e = prints[i];
         const f = fan ? Math.min(p, 6) : 0;
-        const x = e.dx + f * 22 + (o.x || 0);
+        const x = e.dx + f * step + (o.x || 0);
         const y = e.dy - f * 5 + (o.y || 0);
         const z = (n - 1 - p) * 2.6 + (o.z || 0);
         return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateZ(${(
@@ -1516,7 +1533,8 @@
           prints[i].style.transform = pose(i, p);
           prints[i].classList.toggle("top", p === 0);
         });
-      const tell = () => onChange(order[0], [order[0], order[1], order[2], order[n - 1]]);
+      // the photographs worth loading: the top few, the bottom one, and all that show while the pile is fanned
+      const tell = () => onChange(order[0], (fan ? order.slice(0, 7) : order.slice(0, 3)).concat(order[n - 1]));
       // the dealt print lifts, swings out to the side, drops to the desk and slides back under the pile
       function deal(dir, from, side = 1) {
         if (busy || n < 2) return;
@@ -1593,6 +1611,8 @@
       stage.addEventListener("pointerenter", (e) => {
         if (e.pointerType !== "mouse") return;
         fan = true;
+        step = fanStep();
+        tell();
         if (!busy && !drag) layout();
       });
       stage.addEventListener("pointerleave", () => {
