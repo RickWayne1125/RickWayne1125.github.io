@@ -674,6 +674,9 @@
     const m = filmMetrics(112, 8);
     const pose = new THREE.Group();
     pose.rotation.set(-6 * DEG, -16 * DEG, 0);
+    // canister and film together, moved sideways so that, however long the film is, the pair sits in the middle
+    const body = new THREE.Group();
+    pose.add(body);
     const can = canisterMesh(label, env);
     can.scale.setScalar(0.6);
     can.position.x = -140;
@@ -691,7 +694,7 @@
       const W = frames.reduce((a, f) => a + m.fh * f.ratio + m.gap, 0) - m.gap + 44;
       if (!cv || Math.abs(cv.width - W * S) > 2) {
         if (film) {
-          pose.remove(film);
+          body.remove(film);
           disposeTree(film);
         }
         cv = makeCanvas(W * S, m.H * S);
@@ -700,15 +703,17 @@
           new THREE.MeshBasicMaterial({ map: texture(cv), transparent: true, alphaTest: 0.5, side: THREE.DoubleSide })
         );
         film.W = W;
-        pose.add(film);
+        body.add(film);
       }
       drawFilm(cv, S, m, c, frames, W);
+      // the canister spans x -196…-84 (radius 92 × 0.6 round x -140); the film runs from -190 to -190 + W
+      body.position.x = -(-196 + Math.max(-84, -182 + W)) / 2;
       film.material.map.needsUpdate = true;
       kick();
     }
     rebuild();
     order.forEach((fi) => imgs[fi] && imgs[fi].addEventListener("load", rebuild));
-    pose.add(shadow, can);
+    body.add(shadow, can);
     return {
       root: pose,
       ready: () => loaded(imgs[0]),
@@ -880,7 +885,7 @@
         camera.position.z = DIST;
         const float = new THREE.Group();
         const tilt = new THREE.Group();
-        const obj = (spec.c.kind === "roll" ? rollCell : spec.c.kind === "album" ? albumCell : printsCell)(spec, env, kick);
+        const obj = (CELLS[spec.c.kind] || printsCell)(spec, env, kick);
         tilt.add(obj.root);
         float.add(tilt);
         scene.add(float);
@@ -1521,5 +1526,33 @@
     };
   }
 
-  window.PhotographyGL = { grid, album, prints, canister };
+  // what a grid cell is drawn with, by kind; photography-subjects-gl.js adds the four subjects
+  const CELLS = { roll: rollCell, album: albumCell, prints: printsCell };
+  // the shared pieces, lent to photography-subjects-gl.js
+  const kit = {
+    THREE,
+    REDUCED,
+    DEG,
+    clamp,
+    lerp,
+    inOut,
+    outCubic,
+    pulse,
+    lin,
+    hexA,
+    makeCanvas,
+    texture,
+    photoMaterial,
+    shadowCatcher,
+    loaded,
+    whenLoaded,
+    cover,
+    roundRect,
+    wrapText,
+    spaced,
+    blob,
+    disposeTree,
+    viewerBase,
+  };
+  window.PhotographyGL = { grid, album, prints, canister, cells: CELLS, kit };
 })();

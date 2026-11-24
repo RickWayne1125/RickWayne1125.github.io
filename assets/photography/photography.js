@@ -1003,7 +1003,7 @@
       cell.hidden = !!c.subject && JOURNEYS > 0;
       cells.push(cell);
       grid.append(cell);
-      if (!glGrid || c.subject) return;
+      if (!glGrid || !(GL.cells && GL.cells[c.kind])) return;
       // the WebGL object takes over the cell once its first photograph is in; until then the CSS one shows
       try {
         glGrid.add({
@@ -1088,7 +1088,17 @@
 
   /* ---------- an opened collection ---------- */
   // what the subject views (photography-subjects.js) borrow from this script; filled in below, used only later
-  const subjectApi = { h, pic, dotted, count, fmtCoords, REDUCED };
+  const subjectApi = {
+    h,
+    pic,
+    dotted,
+    count,
+    fmtCoords,
+    REDUCED,
+    theme: () => currentTheme(),
+    // the WebGL versions of the subjects, when WebGL is on
+    gl: () => (useGL && window.PhotographySubjectsGL) || null,
+  };
   const viewer = $("#viewer");
   const vBody = $("#v-body");
   let vTilts = [];
