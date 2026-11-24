@@ -1732,7 +1732,7 @@ button.frame:hover {
     padding-block: 30px 14px;
   }
   .map-win {
-    height: 230px;
+    height: 270px;
   }
   .duo {
     grid-template-columns: minmax(0, 1fr);
