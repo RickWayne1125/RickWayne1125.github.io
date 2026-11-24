@@ -33,6 +33,7 @@
   --film-hi: rgba(255, 222, 180, 0.14);
   --edge-glow: rgba(233, 164, 63, 0.4);
   --display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --masthead: "Bodoni Moda", Didot, "Bodoni 72", "Iowan Old Style", Georgia, serif;
   --sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --col: 1120px;
@@ -489,15 +490,12 @@ html.v-open .page {
 }
 .hero h1 {
   margin: 14px 0 0;
-  font-family: var(--display);
-  font-weight: 300;
+  font-family: var(--masthead);
+  font-weight: 400;
   font-size: clamp(3.1rem, 6.6vw, 5.2rem);
   line-height: 0.94;
-  letter-spacing: -0.025em;
-  font-variation-settings: "opsz" 144;
-}
-.hero h1 em {
-  font-weight: 300;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 96;
 }
 .lede {
   margin: 20px 0 22px;
