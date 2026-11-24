@@ -502,6 +502,7 @@
   const backdrop = $("#backdrop");
   const bdMap = $("#bd-map");
   const mapWin = $("#map-win");
+  const heroCopy = $(".hero-copy");
   const GLOBE = window.PhotographyGlobe ? window.PhotographyGlobe.create({ canvas: bdMap, root }) : null;
   const RAD = Math.PI / 180;
   const unit = ([lat, lng]) => {
@@ -685,17 +686,21 @@
       const vis = PINS.map((p, k) => k).filter((k) => !hiddenCell(PINS[k].ci));
       const cx = win.left + win.width / 2;
       const cy = win.top + win.height / 2;
-      const base = clamp(win.height * 0.6, 100, Math.max(100, win.width * 0.5));
+      // on a narrow screen the title and the tabs stand right above the viewfinder: the whole disc, and so every
+      // pin and its name, stays below them
+      const copy = heroCopy.getBoundingClientRect();
+      const ceil = copy.bottom <= win.top + 1 ? copy.bottom + 12 : -Infinity;
+      const base = Math.min(clamp(win.height * 0.6, 100, Math.max(100, win.width * 0.5)), Math.max(cy - ceil, 60));
       const held = performance.now() < holdUntil;
       const phi = handPhi == null ? 18 : handPhi;
-      if (hotSpot && !held) return { key: "over", idx: -1, lam: hotSpot.lng, phi: clamp(hotSpot.lat, -55, 62), R: base, cx, cy, vis };
+      if (hotSpot && !held) return { key: "over", idx: -1, lam: hotSpot.lng, phi: clamp(hotSpot.lat, -55, 62), R: base, cx, cy, vis, ceil };
       const sp = vis.length ? spread(vis.map((k) => [PINS[k].s.lat, PINS[k].s.lng])) : null;
       // the pins are too far apart to sit well on one side of the globe (or it has been turned by hand): it turns
       // slowly, or rests
       if (!sp || sp.r > 0.8 || held || handPhi != null)
-        return { key: "over", idx: -1, lam: spinLam, phi, R: base, cx, cy, vis, spin: !REDUCED && !held };
+        return { key: "over", idx: -1, lam: spinLam, phi, R: base, cx, cy, vis, ceil, spin: !REDUCED && !held };
       const R = clamp((0.4 * win.height) / Math.sin(Math.min(sp.r + 0.16, Math.PI / 2)), base, Math.max(base, win.width * 0.9));
-      return { key: "over", idx: -1, lam: sp.mid[1], phi: sp.mid[0], R, cx, cy, vis };
+      return { key: "over", idx: -1, lam: sp.mid[1], phi: sp.mid[0], R, cx, cy, vis, ceil };
     }
     // further down the page: the globe fills the background, dimmed, turned to whatever has the pointer
     return {
@@ -743,7 +748,8 @@
           above: [x - w / 2, y - 29, x + w / 2, y - 12],
           below: [x - w / 2, y + 12, x + w / 2, y + 29],
         };
-        const free = (b) => b[0] > 4 && b[2] < vw - 4 && !placed.some((p) => hit(b, p)) && !dots.some((d) => d[4] !== k && hit(b, d));
+        const free = (b) =>
+          b[0] > 4 && b[2] < vw - 4 && b[1] > T.ceil - 12 && !placed.some((p) => hit(b, p)) && !dots.some((d) => d[4] !== k && hit(b, d));
         const side = T.spin ? "right" : Object.keys(spots).find((n) => free(spots[n])) || "right";
         placed.push(spots[side]);
         for (const n of ["left", "above", "below"]) el.classList.toggle(n, n === side);
