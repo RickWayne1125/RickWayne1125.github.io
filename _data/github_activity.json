@@ -1,41 +1,41 @@
 {
-  "fetched_at": "2026-11-13T04:53:27.447Z",
+  "fetched_at": "2026-11-27T04:52:48.801Z",
   "entries": [
     {
-      "date": "2026-11-13T03:49:59.000Z",
-      "title": "Opened pull request #1417",
-      "repo": "Human-Agent-Society/reef",
-      "url": "https://github.com/Human-Agent-Society/reef/pull/1417"
+      "date": "2026-11-25T15:32:26.000Z",
+      "title": "Pushed to routing-shadow-execution",
+      "repo": "RickWayne1125/reef",
+      "url": "https://github.com/RickWayne1125/reef/commit/a607f966f0a7931c402491d645725cd7a12140a2"
     },
     {
-      "date": "2026-11-12T06:08:47.000Z",
-      "title": "Merged pull request #1373",
-      "repo": "Human-Agent-Society/reef",
-      "url": "https://github.com/Human-Agent-Society/reef/pull/1373"
+      "date": "2026-11-24T15:57:50.000Z",
+      "title": "Pushed to routing-shadow-execution",
+      "repo": "RickWayne1125/reef",
+      "url": "https://github.com/RickWayne1125/reef/commit/37e2f48d760d96bf61542e5857df55c1fd6a4194"
     },
     {
-      "date": "2026-11-12T00:39:55.000Z",
-      "title": "Opened issue #1374: [Bug] Fix LoRA HF export against the pinned Slime API",
-      "repo": "Human-Agent-Society/reef",
-      "url": "https://github.com/Human-Agent-Society/reef/issues/1374"
+      "date": "2026-11-24T11:11:26.000Z",
+      "title": "Merged pull request #10",
+      "repo": "RickWayne1125/RickWayne1125.github.io",
+      "url": "https://github.com/RickWayne1125/RickWayne1125.github.io/pull/10"
     },
     {
-      "date": "2026-11-11T22:39:11.000Z",
-      "title": "Opened pull request #1373",
-      "repo": "Human-Agent-Society/reef",
-      "url": "https://github.com/Human-Agent-Society/reef/pull/1373"
+      "date": "2026-11-24T09:49:51.000Z",
+      "title": "Opened pull request #10",
+      "repo": "RickWayne1125/RickWayne1125.github.io",
+      "url": "https://github.com/RickWayne1125/RickWayne1125.github.io/pull/10"
     },
     {
-      "date": "2026-11-09T23:08:13.000Z",
-      "title": "Pushed to main",
-      "repo": "RickWayne1125/research-deck",
-      "url": "https://github.com/RickWayne1125/research-deck/commit/6a6bf09b61dcb328e72f7737ba5cb7935b0a048a"
+      "date": "2026-11-24T09:47:27.000Z",
+      "title": "Merged pull request #9",
+      "repo": "RickWayne1125/RickWayne1125.github.io",
+      "url": "https://github.com/RickWayne1125/RickWayne1125.github.io/pull/9"
     },
     {
-      "date": "2026-11-09T20:39:14.000Z",
-      "title": "Opened pull request #1309",
-      "repo": "Human-Agent-Society/reef",
-      "url": "https://github.com/Human-Agent-Society/reef/pull/1309"
+      "date": "2026-11-24T09:38:56.000Z",
+      "title": "Opened pull request #9",
+      "repo": "RickWayne1125/RickWayne1125.github.io",
+      "url": "https://github.com/RickWayne1125/RickWayne1125.github.io/pull/9"
     }
   ]
 }

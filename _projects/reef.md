@@ -7,9 +7,13 @@ icon: assets/img/reef-icon.svg
 importance: 1
 category: open source
 github: https://github.com/Human-Agent-Society/reef
-github_stars_count: "7,806"
-github_stars_checked: "Nov 12, 2026"
+github_stars_count: "7,618"
+github_stars_checked: "Nov 27, 2026"
 merged_pull_requests:
+  - number: 1417
+    url: https://github.com/Human-Agent-Society/reef/pull/1417
+    title: LoRA export compatibility
+    summary: I fixed a Slime API mismatch that blocked LoRA adapter export to Hugging Face. The exporter now validates tensor counts and identity when mapping weight names and preserves saved backup values.
   - number: 1373
     url: https://github.com/Human-Agent-Society/reef/pull/1373
     title: Automatic Semantic Router image builds
